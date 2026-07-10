@@ -1,28 +1,35 @@
-# Laurent Udol — Plaquiste & Isolation · Caen
+# Portfolio — Timothée Ravache · Création de sites web
 
-Site vitrine premium pour Laurent Udol, artisan plaquiste indépendant à Caen
-(Calvados, 14).
+Portfolio de démonstration : quatre sites vitrines fictifs, chacun avec sa
+propre direction artistique, plus la page d'accueil qui les réunit en
+démos live.
 
-## Aperçu
+## Structure
 
-Ouvrir `index.html` dans un navigateur. Le site est un fichier autonome :
+| Chemin | Projet | Univers |
+|---|---|---|
+| `/` | **Portfolio** | Hub studio — cartes avec prévisualisations live (iframes) |
+| `/restaurant/` | **Maison Noir** | Gastronomique nocturne — noir & or, scroll-telling 3 actes |
+| `/gite/` | **Mas des Oliviers** | Maison d'hôtes Provence — pierre & terracotta, sélecteur de chambres |
+| `/saas/` | **Nova** | SaaS analytics IA — galaxie 3D Three.js, GSAP, Lenis |
+| `/plaquiste/` | **Laurent Udol** | Artisan plaquiste — plâtre & sauge, slider avant/après |
 
-- **Stack** : HTML + Tailwind (CDN) + CSS/JS vanilla, aucune étape de build.
-- **Polices** : Bricolage Grotesque · Inter · JetBrains Mono (Google Fonts).
-- **Palette** : « plâtre & sauge » (off-white, encre, sauge, sable) + accent argile pour les CTA.
+## Stack
 
-## Contenu
+Sites statiques autonomes : HTML + Tailwind (CDN) + CSS/JS vanilla.
+Le site SaaS charge en plus GSAP + ScrollTrigger, Lenis et Three.js par CDN.
+Aucune étape de build. Toutes les animations respectent `prefers-reduced-motion`.
 
-Hero animé, métiers (6 services), méthode en 5 étapes, comparateur avant/après
-interactif, section isolation, galerie de réalisations, zone d'intervention
-(Calvados), témoignages et formulaire de contact.
+## Déploiement
 
-## Animations
+N'importe quel hébergeur statique. Le plus simple :
+[Netlify Drop](https://app.netlify.com/drop) — glisser le dossier (ou le zip)
+du dépôt ; chaque site est servi sur son chemin (`/restaurant/`, etc.).
 
-Reveal au scroll, parallaxe, dessin de tracés SVG, compteurs animés, marquee,
-curseur personnalisé, boutons magnétiques, slider avant/après. Toutes les
-animations respectent `prefers-reduced-motion`.
+## Outils d'atelier
 
-## Construit avec
+Design systems générés avec le skill **UI/UX Pro Max** (`.claude/skills/`),
+MCP **Magic** (21st.dev) configuré dans `.mcp.json` (clé via `MAGIC_API_KEY`).
 
-Design system généré via le skill **UI/UX Pro Max** (`.claude/skills/`).
+Tous les contenus (marques, personnes, avis) sont fictifs — démonstrations
+de création.

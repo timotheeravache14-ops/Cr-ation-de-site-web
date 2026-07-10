@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Laurent Udol — Plaquiste & Isolation · Caen & Calvados</title>
-<meta name="description" content="Laurent Udol, artisan plaquiste à Caen. Cloisons, faux-plafonds, isolation thermique & acoustique, combles, agencements sur-mesure et finitions. Devis gratuit dans tout le Calvados." />
-<meta name="theme-color" content="#F6F4EF" />
-<meta property="og:title" content="Laurent Udol — Plaquiste & Isolation · Caen" />
-<meta property="og:description" content="Tout l'aménagement intérieur, par un seul artisan. Caen & Calvados." />
+<title>Timothée Ravache — Création de sites web · Design & développement</title>
+<meta name="description" content="Création de sites vitrines sur-mesure : direction artistique distinctive, animations soignées, mobile-first, accessibilité. Quatre démos live : restaurant gastronomique, maison d'hôtes, SaaS, artisan. Basé à Caen, disponible partout en France." />
+<meta name="theme-color" content="#0C0C0F" />
+<meta property="og:title" content="Timothée Ravache — Création de sites web" />
+<meta property="og:description" content="Des sites qui font lever les yeux. Quatre univers, quatre directions artistiques, zéro template." />
 <meta property="og:type" content="website" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -20,12 +20,12 @@
     theme: {
       extend: {
         colors: {
-          ink: '#221F1B', plaster: '#F6F4EF', sand: '#ECE9E2', line: '#D2CEC4',
-          slate: '#6E6A61', sage: '#79916F', 'sage-deep': '#5C7253', 'sage-tint': '#E7ECE1',
-          clay: '#B86B4B', 'clay-deep': '#9E5436'
+          ink: '#0C0C0F', 'ink-2': '#121216', card: '#16161B',
+          cream: '#F3F1EC', muted: '#A2A0A8', dim: '#6E6C76',
+          gold: '#C9A24B', terra: '#BE6A47', violet: '#8B5CF6', sage: '#79916F'
         },
         fontFamily: {
-          display: ['"Bricolage Grotesque"', 'sans-serif'],
+          display: ['"Instrument Serif"', 'serif'],
           sans: ['Inter', 'system-ui', 'sans-serif'],
           mono: ['"JetBrains Mono"', 'monospace']
         }
@@ -35,920 +35,374 @@
 </script>
 
 <style>
-  :root{
-    --ink:#221F1B; --plaster:#F6F4EF; --sand:#ECE9E2; --line:#D2CEC4;
-    --slate:#6E6A61; --sage:#79916F; --sage-deep:#5C7253; --sage-tint:#E7ECE1;
-    --clay:#B86B4B; --clay-deep:#9E5436;
-  }
+  :root{ --line:rgba(243,241,236,.12); }
   *{ -webkit-font-smoothing:antialiased; }
   html{ scroll-behavior:smooth; }
-  body{ background:var(--plaster); color:var(--ink); overflow-x:hidden; cursor:none; }
+  body{ background:#0C0C0F; color:#F3F1EC; overflow-x:hidden; font-family:'Inter',sans-serif; cursor:none; }
   @media (hover:none){ body{ cursor:auto; } }
-  ::selection{ background:var(--sage); color:#fff; }
+  ::selection{ background:#C9A24B; color:#0C0C0F; }
+  .serif{ font-family:'Instrument Serif',serif; }
+  .eyebrow{ font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.3em; font-weight:500; font-size:11px; }
 
-  /* Grain texture overlay */
-  .grain{
-    position:fixed; inset:0; z-index:9990; pointer-events:none; opacity:.045; mix-blend-mode:multiply;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+  .grain{ position:fixed; inset:0; z-index:9990; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='190'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 
-  /* Custom cursor */
-  .cursor-dot,.cursor-ring{ position:fixed; top:0; left:0; z-index:9999; pointer-events:none; border-radius:50%; will-change:transform; }
-  .cursor-dot{ width:7px; height:7px; background:var(--clay); transform:translate(-50%,-50%); }
-  .cursor-ring{ width:38px; height:38px; border:1.5px solid rgba(34,31,27,.35); transform:translate(-50%,-50%); transition:width .25s, height .25s, border-color .25s, background .25s; }
-  .cursor-ring.hovering{ width:62px; height:62px; border-color:var(--sage); background:rgba(121,145,111,.08); }
-  @media (hover:none){ .cursor-dot,.cursor-ring{ display:none; } }
+  .cur-dot,.cur-ring{ position:fixed; top:0; left:0; z-index:9999; pointer-events:none; border-radius:50%; will-change:transform; }
+  .cur-dot{ width:6px; height:6px; background:#F3F1EC; transform:translate(-50%,-50%); mix-blend-mode:difference; }
+  .cur-ring{ width:38px; height:38px; border:1.5px solid rgba(243,241,236,.4); transform:translate(-50%,-50%); transition:width .3s,height .3s,border-color .3s; mix-blend-mode:difference; }
+  .cur-ring.hover{ width:70px; height:70px; border-color:#F3F1EC; }
+  @media (hover:none){ .cur-dot,.cur-ring{ display:none; } }
 
-  /* Scroll progress */
-  .progress{ position:fixed; top:0; left:0; height:3px; width:0%; z-index:9998; background:linear-gradient(90deg,var(--sage),var(--clay)); }
+  .progress{ position:fixed; top:0; left:0; height:2px; width:0; z-index:9998; background:linear-gradient(90deg,#C9A24B,#BE6A47,#8B5CF6); }
 
-  /* Reveal animation */
-  [data-reveal]{ opacity:0; transform:translateY(34px); transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+  [data-reveal]{ opacity:0; transform:translateY(36px); transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1); }
   [data-reveal].in{ opacity:1; transform:none; }
-  [data-reveal][data-delay="1"]{ transition-delay:.08s; }
-  [data-reveal][data-delay="2"]{ transition-delay:.16s; }
-  [data-reveal][data-delay="3"]{ transition-delay:.24s; }
-  [data-reveal][data-delay="4"]{ transition-delay:.32s; }
-  [data-reveal][data-delay="5"]{ transition-delay:.40s; }
+  [data-d="1"]{ transition-delay:.1s; } [data-d="2"]{ transition-delay:.2s; } [data-d="3"]{ transition-delay:.3s; }
 
-  /* Hero word reveal */
-  .word{ display:inline-block; overflow:hidden; vertical-align:top; }
-  .word > span{ display:inline-block; transform:translateY(110%); transition:transform 1s cubic-bezier(.16,1,.3,1); }
-  .hero-ready .word > span{ transform:translateY(0); }
-  .hero-ready .word:nth-child(1) > span{ transition-delay:.05s; }
-  .hero-ready .word:nth-child(2) > span{ transition-delay:.13s; }
-  .hero-ready .word:nth-child(3) > span{ transition-delay:.21s; }
-  .hero-ready .word:nth-child(4) > span{ transition-delay:.29s; }
-  .hero-ready .word:nth-child(5) > span{ transition-delay:.37s; }
-  .hero-ready .word:nth-child(6) > span{ transition-delay:.45s; }
-  .hero-ready .word:nth-child(7) > span{ transition-delay:.53s; }
+  .line-r{ display:block; overflow:hidden; }
+  .line-r > span{ display:block; transform:translateY(112%); transition:transform 1.15s cubic-bezier(.16,1,.3,1); }
+  .ready .line-r > span{ transform:translateY(0); }
+  .ready .line-r:nth-child(2) > span{ transition-delay:.12s; }
+  .ready .line-r:nth-child(3) > span{ transition-delay:.24s; }
 
-  /* Marquee */
-  .marquee{ display:flex; gap:0; width:max-content; animation:scrollx 38s linear infinite; }
-  .marquee:hover{ animation-play-state:paused; }
-  @keyframes scrollx{ to{ transform:translateX(-50%); } }
+  /* project cards */
+  .proj{ position:relative; border:1px solid var(--line); transition:border-color .5s, transform .6s cubic-bezier(.16,1,.3,1), box-shadow .6s; overflow:hidden; }
+  .proj:hover{ transform:translateY(-6px); }
+  .proj.acc-gold:hover{ border-color:rgba(201,162,75,.6); box-shadow:0 34px 80px -40px rgba(201,162,75,.35); }
+  .proj.acc-terra:hover{ border-color:rgba(190,106,71,.6); box-shadow:0 34px 80px -40px rgba(190,106,71,.35); }
+  .proj.acc-violet:hover{ border-color:rgba(139,92,246,.6); box-shadow:0 34px 80px -40px rgba(139,92,246,.35); }
+  .proj.acc-sage:hover{ border-color:rgba(121,145,111,.6); box-shadow:0 34px 80px -40px rgba(121,145,111,.35); }
 
-  /* Magnetic button */
-  .magnetic{ will-change:transform; }
+  /* live preview frame: iframe rendered at 4x width, scaled to 25% */
+  .pv{ position:relative; overflow:hidden; background:#101014; }
+  .pv .cover{ position:absolute; inset:0; display:grid; place-items:center; transition:opacity .8s ease; z-index:2; }
+  .pv iframe{ position:absolute; top:0; left:0; width:400%; height:400%; transform:scale(.25); transform-origin:0 0; border:0; pointer-events:none; opacity:0; transition:opacity .9s ease; z-index:1; }
+  .pv.loaded iframe{ opacity:1; }
+  .pv.loaded .cover{ opacity:0; }
+  .pv::after{ content:""; position:absolute; inset:0; z-index:3; background:linear-gradient(180deg,transparent 60%,rgba(12,12,15,.55)); pointer-events:none; }
+  .proj .pv > *{ transition:transform 1s cubic-bezier(.16,1,.3,1); }
+  .proj:hover .pv iframe, .proj:hover .pv .cover{ transform:scale(1.03); }
+  .proj:hover .pv.loaded iframe{ transform:scale(.2575); }
 
-  /* Service card */
-  .svc{ position:relative; overflow:hidden; transition:transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s, border-color .5s; }
-  .svc::after{ content:""; position:absolute; inset:0; background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(121,145,111,.14), transparent 60%); opacity:0; transition:opacity .4s; pointer-events:none; }
-  .svc:hover{ transform:translateY(-6px); box-shadow:0 30px 60px -30px rgba(34,31,27,.35); border-color:var(--sage); }
-  .svc:hover::after{ opacity:1; }
-  .svc .num{ transition:transform .5s cubic-bezier(.16,1,.3,1), color .4s; }
-  .svc:hover .num{ transform:translateX(6px); color:var(--clay); }
+  .chip{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; border:1px solid var(--line); border-radius:999px; padding:5px 11px; color:#A2A0A8; }
 
-  /* SVG line draw */
-  .draw{ stroke-dasharray:var(--len,1200); stroke-dashoffset:var(--len,1200); transition:stroke-dashoffset 2.2s ease; }
-  .draw.in{ stroke-dashoffset:0; }
+  .mq{ display:flex; width:max-content; animation:mq 30s linear infinite; }
+  @keyframes mq{ to{ transform:translateX(-50%); } }
 
-  /* Before/After slider */
-  .ba{ position:relative; overflow:hidden; touch-action:none; user-select:none; }
-  .ba-after{ position:absolute; inset:0; clip-path:inset(0 0 0 50%); }
-  .ba-handle{ position:absolute; top:0; bottom:0; left:50%; width:2px; background:#fff; box-shadow:0 0 0 1px rgba(34,31,27,.2); }
-  .ba-grip{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:48px; height:48px; border-radius:50%; background:#fff; display:grid; place-items:center; box-shadow:0 8px 24px rgba(34,31,27,.28); }
-  .ba-tag{ position:absolute; bottom:14px; padding:5px 12px; border-radius:999px; font:500 11px/1 "JetBrains Mono",monospace; letter-spacing:.08em; background:rgba(34,31,27,.72); color:#fff; backdrop-filter:blur(4px); }
+  .link-u{ position:relative; }
+  .link-u::after{ content:""; position:absolute; left:0; bottom:-3px; height:1px; width:0; background:#F3F1EC; transition:width .4s cubic-bezier(.16,1,.3,1); }
+  .link-u:hover::after{ width:100%; }
 
-  /* Timeline */
-  .tl-dot{ box-shadow:0 0 0 0 rgba(121,145,111,.5); }
-  .tl-item.in .tl-dot{ animation:pulse 2.4s ease-out infinite; }
-  @keyframes pulse{ 0%{ box-shadow:0 0 0 0 rgba(121,145,111,.45);} 70%{ box-shadow:0 0 0 14px rgba(121,145,111,0);} 100%{ box-shadow:0 0 0 0 rgba(121,145,111,0);} }
-
-  /* Gallery */
-  .tile{ position:relative; overflow:hidden; transition:transform .6s cubic-bezier(.16,1,.3,1); }
-  .tile svg{ transition:transform .8s cubic-bezier(.16,1,.3,1); }
-  .tile:hover svg{ transform:scale(1.08); }
-  .tile .cap{ position:absolute; inset:auto 0 0 0; padding:16px; transform:translateY(101%); transition:transform .5s cubic-bezier(.16,1,.3,1); background:linear-gradient(transparent, rgba(34,31,27,.82)); }
-  .tile:hover .cap{ transform:translateY(0); }
-
-  /* Map markers */
-  .mk{ transform-origin:center; }
-  .mk circle.ping{ animation:ping 2.6s cubic-bezier(0,0,.2,1) infinite; transform-origin:center; }
-  @keyframes ping{ 0%{ r:5; opacity:.7;} 80%,100%{ r:26; opacity:0; } }
-
-  /* Floats */
-  .float-a{ animation:floatA 9s ease-in-out infinite; }
-  .float-b{ animation:floatB 11s ease-in-out infinite; }
-  @keyframes floatA{ 50%{ transform:translateY(-16px); } }
-  @keyframes floatB{ 50%{ transform:translateY(14px) translateX(-8px); } }
-
-  /* Nav link underline */
-  .nlink{ position:relative; }
-  .nlink::after{ content:""; position:absolute; left:0; bottom:-4px; height:1.5px; width:0; background:var(--ink); transition:width .35s cubic-bezier(.16,1,.3,1); }
-  .nlink:hover::after{ width:100%; }
-
-  /* Intro preloader */
-  #intro{ position:fixed; inset:0; z-index:10000; background:var(--ink); display:grid; place-items:center; }
-  #intro .bars{ display:flex; gap:6px; }
-  #intro .bars i{ width:8px; height:46px; background:var(--plaster); transform-origin:bottom; animation:bar 1s ease-in-out infinite; }
-  #intro .bars i:nth-child(2){ animation-delay:.12s; }
-  #intro .bars i:nth-child(3){ animation-delay:.24s; }
-  #intro .bars i:nth-child(4){ animation-delay:.36s; }
-  @keyframes bar{ 0%,100%{ transform:scaleY(.4);} 50%{ transform:scaleY(1);} }
-  #intro.done{ transform:translateY(-100%); transition:transform 1s cubic-bezier(.76,0,.24,1); }
+  .btn-cream{ background:#F3F1EC; color:#0C0C0F; transition:transform .3s, box-shadow .3s; }
+  .btn-cream:hover{ box-shadow:0 0 40px rgba(243,241,236,.25); }
+  .btn-ghost{ border:1px solid var(--line); transition:border-color .3s, background .3s; }
+  .btn-ghost:hover{ border-color:rgba(243,241,236,.5); background:rgba(243,241,236,.05); }
 
   @media (prefers-reduced-motion:reduce){
     *{ animation:none !important; transition:none !important; }
     [data-reveal]{ opacity:1; transform:none; }
-    .word > span{ transform:none; }
-    .draw{ stroke-dashoffset:0; }
-    #intro{ display:none; }
+    .line-r>span{ transform:none; }
     html{ scroll-behavior:auto; }
   }
 </style>
 </head>
-
-<body class="font-sans antialiased">
-
-<!-- Preloader -->
-<div id="intro" aria-hidden="true"><div class="bars"><i></i><i></i><i></i><i></i></div></div>
+<body>
 
 <div class="grain" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
-<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
-<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cur-ring" id="ring" aria-hidden="true"></div>
+<div class="cur-dot" id="dot" aria-hidden="true"></div>
 
-<a href="#contenu" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[10001] focus:bg-ink focus:text-plaster focus:px-4 focus:py-2 focus:rounded">Aller au contenu</a>
+<a href="#contenu" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[10001] focus:bg-cream focus:text-ink focus:px-4 focus:py-2 focus:rounded">Aller au contenu</a>
 
-<!-- ===================== NAV ===================== -->
-<header class="fixed top-0 inset-x-0 z-[9995] px-4 sm:px-6 pt-4" id="nav">
-  <nav class="max-w-7xl mx-auto flex items-center justify-between rounded-2xl border border-line bg-plaster/80 backdrop-blur-md px-5 py-3 transition-all duration-500" id="navbar">
-    <a href="#top" class="flex items-center gap-3 group" data-hover>
-      <span class="grid place-items-center w-10 h-10 rounded-xl bg-ink text-plaster font-display font-bold text-lg group-hover:bg-sage transition-colors duration-300">LU</span>
-      <span class="leading-tight">
-        <span class="block font-display font-semibold text-[15px] tracking-tight">Laurent Udol</span>
-        <span class="block font-mono text-[10px] text-slate tracking-wider">PLAQUISTE · CAEN</span>
-      </span>
-    </a>
-    <div class="hidden lg:flex items-center gap-8 text-sm font-medium">
-      <a href="#services" class="nlink" data-hover>Métiers</a>
-      <a href="#process" class="nlink" data-hover>Méthode</a>
-      <a href="#avant-apres" class="nlink" data-hover>Avant / Après</a>
-      <a href="#realisations" class="nlink" data-hover>Réalisations</a>
-      <a href="#zone" class="nlink" data-hover>Zone</a>
-    </div>
-    <a href="#contact" class="magnetic group inline-flex items-center gap-2 rounded-xl bg-ink text-plaster px-5 py-2.5 text-sm font-medium hover:bg-clay transition-colors duration-300" data-hover>
-      Devis gratuit
-      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-  </nav>
+<!-- NAV -->
+<header class="fixed top-0 inset-x-0 z-[9995] px-5 sm:px-8 py-5 flex items-center justify-between backdrop-blur-sm bg-ink/60">
+  <a href="#top" class="font-mono text-sm tracking-wider" data-hover>TR<span class="text-gold">.</span></a>
+  <div class="hidden sm:flex items-center gap-8 text-sm text-muted">
+    <a href="#projets" class="link-u hover:text-cream transition-colors" data-hover>Projets</a>
+    <a href="#approche" class="link-u hover:text-cream transition-colors" data-hover>Approche</a>
+    <a href="#contact" class="link-u hover:text-cream transition-colors" data-hover>Contact</a>
+  </div>
+  <a href="mailto:timothee.ravache14@gmail.com" class="btn-ghost text-sm px-5 py-2.5 rounded-full" data-hover>Me contacter</a>
 </header>
 
-<main id="contenu">
-<span id="top"></span>
+<main id="contenu"><span id="top"></span>
 
-<!-- ===================== HERO ===================== -->
-<section class="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden">
-  <!-- gradient mesh bg -->
+<!-- HERO -->
+<section class="relative min-h-[92svh] flex items-center pt-28 pb-16 overflow-hidden">
   <div class="absolute inset-0 -z-10" aria-hidden="true">
-    <div class="parallax absolute -top-32 -left-24 w-[520px] h-[520px] rounded-full blur-3xl opacity-50 float-a" data-depth="0.2" style="background:radial-gradient(circle,var(--sage-tint),transparent 70%)"></div>
-    <div class="parallax absolute top-1/3 -right-32 w-[560px] h-[560px] rounded-full blur-3xl opacity-40 float-b" data-depth="0.35" style="background:radial-gradient(circle,#EBDfD4,transparent 70%)"></div>
-    <svg class="absolute inset-0 w-full h-full opacity-[0.4]" aria-hidden="true"><defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#D2CEC4" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>
+    <div class="absolute -top-32 -left-24 w-[480px] h-[480px] rounded-full blur-3xl opacity-25" style="background:radial-gradient(circle,#C9A24B,transparent 65%)"></div>
+    <div class="absolute bottom-0 -right-32 w-[520px] h-[520px] rounded-full blur-3xl opacity-20" style="background:radial-gradient(circle,#8B5CF6,transparent 65%)"></div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full grid lg:grid-cols-12 gap-10 items-center">
-    <!-- Left copy -->
-    <div class="lg:col-span-7">
-      <div class="inline-flex items-center gap-2 rounded-full border border-line bg-white/60 px-4 py-1.5 mb-7" data-reveal>
-        <span class="w-2 h-2 rounded-full bg-sage animate-pulse"></span>
-        <span class="font-mono text-[11px] tracking-wider text-slate">ARTISAN INDÉPENDANT · CAEN & CALVADOS (14)</span>
-      </div>
-
-      <h1 class="font-display font-bold tracking-tight text-ink text-[clamp(2.6rem,6.4vw,5.4rem)] leading-[0.98]" id="heroTitle">
-        <span class="word"><span>Tout</span></span> <span class="word"><span>l'aménagement</span></span><br class="hidden sm:block" />
-        <span class="word"><span>intérieur,</span></span> <span class="word"><span>par</span></span> <span class="word"><span>un</span></span> <span class="word"><span>seul</span></span>
-        <span class="word"><span class="text-sage">artisan.</span></span>
-      </h1>
-
-      <p class="mt-7 max-w-xl text-lg text-slate leading-relaxed" data-reveal data-delay="2">
-        Cloisons, faux-plafonds, isolation et finitions. De la première visite au dernier coup de pinceau, un interlocuteur unique pour un chantier propre, droit et tenu dans les délais.
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 w-full">
+    <p class="eyebrow text-muted mb-8 flex items-center gap-3" data-reveal>
+      <span class="w-2 h-2 rounded-full bg-gold animate-pulse inline-block"></span>
+      Timothée Ravache · Création de sites web · Caen & à distance
+    </p>
+    <h1 class="font-medium tracking-[-0.02em] leading-[1.02] text-[clamp(2.8rem,8.2vw,7rem)]" id="heroTitle">
+      <span class="line-r"><span>Des sites qui font</span></span>
+      <span class="line-r"><span><em class="serif italic font-normal text-gold">lever</em> les yeux,</span></span>
+      <span class="line-r"><span>pas juste défiler.</span></span>
+    </h1>
+    <div class="mt-10 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+      <p class="max-w-xl text-lg text-muted leading-relaxed" data-reveal data-d="2">
+        Chaque projet reçoit sa propre direction artistique — palette, typographies, animations signatures — construite sur mesure pour son secteur. Zéro template. Quatre univers à explorer ci-dessous, en démo live.
       </p>
-
-      <div class="mt-9 flex flex-wrap items-center gap-4" data-reveal data-delay="3">
-        <a href="#contact" class="magnetic group inline-flex items-center gap-3 rounded-2xl bg-ink text-plaster px-7 py-4 font-medium hover:bg-clay transition-colors duration-300" data-hover>
-          Demander un devis
-          <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="flex items-center gap-4 shrink-0" data-reveal data-d="3">
+        <a href="#projets" class="btn-cream font-semibold px-7 py-4 rounded-full inline-flex items-center gap-2.5" data-hover>
+          Voir les projets
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14m0 0 6-6m-6 6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a href="#realisations" class="group inline-flex items-center gap-3 rounded-2xl border border-line bg-white/50 px-7 py-4 font-medium hover:border-ink transition-colors duration-300" data-hover>
-          <span class="grid place-items-center w-8 h-8 rounded-full bg-sage-tint text-sage-deep">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          </span>
-          Voir les réalisations
-        </a>
-      </div>
-
-      <!-- stats -->
-      <div class="mt-12 grid grid-cols-3 gap-6 max-w-lg" data-reveal data-delay="4">
-        <div>
-          <div class="font-display font-bold text-3xl sm:text-4xl"><span class="count" data-to="14">0</span></div>
-          <div class="font-mono text-[11px] text-slate tracking-wider mt-1">ANS DE MÉTIER</div>
-        </div>
-        <div>
-          <div class="font-display font-bold text-3xl sm:text-4xl"><span class="count" data-to="320">0</span></div>
-          <div class="font-mono text-[11px] text-slate tracking-wider mt-1">CHANTIERS LIVRÉS</div>
-        </div>
-        <div>
-          <div class="font-display font-bold text-3xl sm:text-4xl"><span class="count" data-to="100">0</span><span class="text-sage">%</span></div>
-          <div class="font-mono text-[11px] text-slate tracking-wider mt-1">FAIT MAISON</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right illustration -->
-    <div class="lg:col-span-5 relative" data-reveal data-delay="2">
-      <div class="parallax" data-depth="0.12">
-        <svg viewBox="0 0 460 520" class="w-full max-w-md mx-auto drop-shadow-2xl" role="img" aria-label="Illustration d'une pièce en cours d'aménagement : cloison en plaques de plâtre, lumière et outils de plaquiste.">
-          <defs>
-            <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBFAF7"/><stop offset="1" stop-color="#ECE9E2"/></linearGradient>
-            <linearGradient id="floor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E3DED4"/><stop offset="1" stop-color="#D2CEC4"/></linearGradient>
-            <linearGradient id="lightbeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF7E8" stop-opacity=".9"/><stop offset="1" stop-color="#FFF7E8" stop-opacity="0"/></linearGradient>
-            <linearGradient id="board" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F6F4EF"/><stop offset="1" stop-color="#E7E3DA"/></linearGradient>
-          </defs>
-
-          <!-- room -->
-          <rect x="20" y="20" width="420" height="430" rx="14" fill="url(#wall)" stroke="#D2CEC4"/>
-          <polygon points="20,450 440,450 440,500 20,500" fill="url(#floor)"/>
-          <!-- light beam from window -->
-          <polygon points="300,20 420,20 380,300 250,300" fill="url(#lightbeam)" class="float-a"/>
-          <!-- window -->
-          <rect x="312" y="46" width="96" height="130" rx="6" fill="#EAF0EA" stroke="#C7D2C2"/>
-          <line x1="360" y1="46" x2="360" y2="176" stroke="#C7D2C2"/><line x1="312" y1="111" x2="408" y2="111" stroke="#C7D2C2"/>
-
-          <!-- metal frame studs -->
-          <g stroke="#BFC6C9" stroke-width="6">
-            <line x1="70" y1="60" x2="70" y2="448"/><line x1="130" y1="60" x2="130" y2="448"/><line x1="190" y1="60" x2="190" y2="300"/>
-          </g>
-          <!-- plasterboards being installed -->
-          <rect x="44" y="70" width="58" height="370" rx="3" fill="url(#board)" stroke="#D8D3C8" class="float-b"/>
-          <rect x="104" y="70" width="58" height="220" rx="3" fill="url(#board)" stroke="#D8D3C8"/>
-          <!-- screws -->
-          <g fill="#B9B3A6"><circle cx="73" cy="120" r="2.4"/><circle cx="73" cy="240" r="2.4"/><circle cx="73" cy="360" r="2.4"/><circle cx="133" cy="120" r="2.4"/><circle cx="133" cy="240" r="2.4"/></g>
-
-          <!-- animated trowel stroke (joint band) -->
-          <path class="draw" style="--len:480" d="M150 360 C 210 360 250 330 300 330 C 350 330 380 350 410 350" fill="none" stroke="#5C7253" stroke-width="5" stroke-linecap="round"/>
-
-          <!-- trowel tool -->
-          <g class="float-a" transform="translate(250,300) rotate(-18)">
-            <rect x="0" y="0" width="120" height="16" rx="4" fill="#9AA0A4"/>
-            <rect x="46" y="-26" width="30" height="26" rx="5" fill="#8A5A3C"/>
-            <rect x="40" y="-34" width="42" height="12" rx="6" fill="#6E6A61"/>
-          </g>
-
-          <!-- bucket -->
-          <g transform="translate(70,392)">
-            <path d="M0 0 h66 l-7 56 h-52 z" fill="#C98A4B"/><rect x="-4" y="-8" width="74" height="12" rx="4" fill="#B86B4B"/>
-            <path d="M8 8 h50 l-2 16 h-46 z" fill="#F6F4EF" opacity=".8"/>
-          </g>
-        </svg>
-      </div>
-      <!-- floating label card -->
-      <div class="absolute -bottom-2 -left-2 sm:left-2 rounded-2xl border border-line bg-white/85 backdrop-blur px-4 py-3 shadow-xl float-b" data-hover>
-        <div class="flex items-center gap-3">
-          <span class="grid place-items-center w-9 h-9 rounded-full bg-sage-tint text-sage-deep">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          <div class="leading-tight">
-            <div class="font-display font-semibold text-sm">Finition niveau Q4</div>
-            <div class="font-mono text-[10px] text-slate tracking-wide">PRÊT À PEINDRE</div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
-
-  <!-- scroll cue -->
-  <a href="#services" class="absolute left-1/2 -translate-x-1/2 bottom-6 hidden sm:flex flex-col items-center gap-2 text-slate" data-hover aria-label="Défiler">
-    <span class="font-mono text-[10px] tracking-widest">SCROLL</span>
-    <span class="w-px h-10 bg-line relative overflow-hidden"><span class="absolute inset-x-0 top-0 h-3 bg-ink animate-[scrolldown_1.8s_ease-in-out_infinite]"></span></span>
-  </a>
 </section>
-<style>@keyframes scrolldown{ 0%{ transform:translateY(-12px);} 50%{ transform:translateY(40px);} 100%{ transform:translateY(-12px);} }</style>
 
-<!-- ===================== MARQUEE ===================== -->
-<section class="border-y border-line bg-ink text-plaster py-5 overflow-hidden" aria-label="Matériaux et certifications">
-  <div class="marquee items-center text-2xl sm:text-3xl font-display font-medium">
+<!-- MARQUEE -->
+<section class="border-y border-[var(--line)] py-4 overflow-hidden" aria-hidden="true">
+  <div class="mq items-center font-mono text-sm text-dim tracking-wider">
     <span class="flex items-center">
-      <span class="px-8">Placo® BA13</span><span class="text-clay px-2">✶</span>
-      <span class="px-8">Knauf</span><span class="text-clay px-2">✶</span>
-      <span class="px-8">Isolation RGE</span><span class="text-clay px-2">✶</span>
-      <span class="px-8">Laine de roche</span><span class="text-clay px-2">✶</span>
-      <span class="px-8">Ossature métal</span><span class="text-clay px-2">✶</span>
-      <span class="px-8">Bandes & enduits</span><span class="text-clay px-2">✶</span>
+      <span class="px-8">DIRECTION ARTISTIQUE</span><span class="text-gold">✳</span><span class="px-8">ANIMATIONS GSAP & THREE.JS</span><span class="text-terra">✳</span><span class="px-8">MOBILE-FIRST</span><span class="text-violet">✳</span><span class="px-8">ACCESSIBILITÉ</span><span class="text-sage">✳</span><span class="px-8">CONTENU CRÉDIBLE</span><span class="text-gold">✳</span><span class="px-8">PERFORMANCE</span><span class="text-terra">✳</span>
     </span>
-    <span class="flex items-center" aria-hidden="true">
-      <span class="px-8">Placo® BA13</span><span class="text-clay px-2">✶</span>
-      <span class="px-8">Knauf</span><span class="text-clay px-2">✶</span>
-      <span class="px-8">Isolation RGE</span><span class="text-clay px-2">✶</span>
-      <span class="px-8">Laine de roche</span><span class="text-clay px-2">✶</span>
-      <span class="px-8">Ossature métal</span><span class="text-clay px-2">✶</span>
-      <span class="px-8">Bandes & enduits</span><span class="text-clay px-2">✶</span>
+    <span class="flex items-center">
+      <span class="px-8">DIRECTION ARTISTIQUE</span><span class="text-gold">✳</span><span class="px-8">ANIMATIONS GSAP & THREE.JS</span><span class="text-terra">✳</span><span class="px-8">MOBILE-FIRST</span><span class="text-violet">✳</span><span class="px-8">ACCESSIBILITÉ</span><span class="text-sage">✳</span><span class="px-8">CONTENU CRÉDIBLE</span><span class="text-gold">✳</span><span class="px-8">PERFORMANCE</span><span class="text-terra">✳</span>
     </span>
   </div>
 </section>
 
-<!-- ===================== SERVICES ===================== -->
-<section id="services" class="py-24 sm:py-32">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+<!-- PROJETS -->
+<section id="projets" class="py-24 sm:py-32">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
       <div>
-        <span class="font-mono text-xs tracking-widest text-sage-deep" data-reveal>01 — LES MÉTIERS</span>
-        <h2 class="mt-3 font-display font-bold text-4xl sm:text-6xl tracking-tight" data-reveal data-delay="1">Six savoir-faire,<br/>un seul chantier.</h2>
+        <p class="eyebrow text-gold mb-5" data-reveal>Projets — démos live</p>
+        <h2 class="font-medium text-[clamp(2.2rem,5.5vw,4.2rem)] leading-none tracking-tight" data-reveal data-d="1">Quatre univers,<br/><em class="serif italic font-normal">quatre signatures.</em></h2>
       </div>
-      <p class="md:max-w-xs text-slate" data-reveal data-delay="2">Du gros œuvre intérieur à la finition prête à peindre, chaque étape est réalisée par la même main.</p>
+      <p class="md:max-w-sm text-muted" data-reveal data-d="2">Des concepts fictifs conçus de A à Z pour démontrer une direction artistique complète. Chaque vignette est le site réel, en direct — cliquez pour l'explorer.</p>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <!-- card template -->
-      <article class="svc group rounded-3xl border border-line bg-white/60 p-7" data-reveal data-hover>
-        <div class="flex items-start justify-between">
-          <span class="grid place-items-center w-14 h-14 rounded-2xl bg-sage-tint text-sage-deep">
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg>
-          </span>
-          <span class="num font-display font-bold text-2xl text-line">01</span>
-        </div>
-        <h3 class="mt-6 font-display font-semibold text-xl">Cloisons & doublages</h3>
-        <p class="mt-2 text-slate text-[15px] leading-relaxed">Séparation des espaces et habillage des murs sur ossature métallique, parfaitement d'aplomb.</p>
-      </article>
+    <div class="grid md:grid-cols-2 gap-6">
 
-      <article class="svc group rounded-3xl border border-line bg-white/60 p-7" data-reveal data-delay="1" data-hover>
-        <div class="flex items-start justify-between">
-          <span class="grid place-items-center w-14 h-14 rounded-2xl bg-sage-tint text-sage-deep">
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7h18M3 12h18M3 17h18" stroke-linecap="round"/></svg>
-          </span>
-          <span class="num font-display font-bold text-2xl text-line">02</span>
-        </div>
-        <h3 class="mt-6 font-display font-semibold text-xl">Faux-plafonds</h3>
-        <p class="mt-2 text-slate text-[15px] leading-relaxed">Plafonds suspendus, intégration de spots et correction acoustique pour des volumes nets.</p>
-      </article>
-
-      <article class="svc group rounded-3xl border border-line bg-white/60 p-7" data-reveal data-delay="2" data-hover>
-        <div class="flex items-start justify-between">
-          <span class="grid place-items-center w-14 h-14 rounded-2xl bg-sage-tint text-sage-deep">
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 14c2-4 4-6 8-6s6 2 8 6" stroke-linecap="round"/><path d="M4 19c2-3 4-4.5 8-4.5S18 16 20 19" stroke-linecap="round"/></svg>
-          </span>
-          <span class="num font-display font-bold text-2xl text-line">03</span>
-        </div>
-        <h3 class="mt-6 font-display font-semibold text-xl">Isolation thermique & acoustique</h3>
-        <p class="mt-2 text-slate text-[15px] leading-relaxed">Murs, rampants et plafonds : moins de déperditions, plus de silence, été comme hiver.</p>
-      </article>
-
-      <article class="svc group rounded-3xl border border-line bg-white/60 p-7" data-reveal data-hover>
-        <div class="flex items-start justify-between">
-          <span class="grid place-items-center w-14 h-14 rounded-2xl bg-sage-tint text-sage-deep">
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12 12 4l9 8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 11v8h14v-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          <span class="num font-display font-bold text-2xl text-line">04</span>
-        </div>
-        <h3 class="mt-6 font-display font-semibold text-xl">Aménagement de combles</h3>
-        <p class="mt-2 text-slate text-[15px] leading-relaxed">Transformer un volume perdu en pièce à vivre saine, isolée et lumineuse.</p>
-      </article>
-
-      <article class="svc group rounded-3xl border border-line bg-white/60 p-7" data-reveal data-delay="1" data-hover>
-        <div class="flex items-start justify-between">
-          <span class="grid place-items-center w-14 h-14 rounded-2xl bg-sage-tint text-sage-deep">
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10" stroke-linecap="round"/></svg>
-          </span>
-          <span class="num font-display font-bold text-2xl text-line">05</span>
-        </div>
-        <h3 class="mt-6 font-display font-semibold text-xl">Agencements sur-mesure</h3>
-        <p class="mt-2 text-slate text-[15px] leading-relaxed">Niches, têtes de lit, coffrages et meubles en placo dessinés pour votre intérieur.</p>
-      </article>
-
-      <article class="svc group rounded-3xl border border-line bg-white/60 p-7" data-reveal data-delay="2" data-hover>
-        <div class="flex items-start justify-between">
-          <span class="grid place-items-center w-14 h-14 rounded-2xl bg-sage-tint text-sage-deep">
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20 16 8l-4-4L0 16z" transform="translate(2 0)" stroke-linejoin="round"/><path d="M14 6l4 4" stroke-linecap="round"/></svg>
-          </span>
-          <span class="num font-display font-bold text-2xl text-line">06</span>
-        </div>
-        <h3 class="mt-6 font-display font-semibold text-xl">Bandes & finitions</h3>
-        <p class="mt-2 text-slate text-[15px] leading-relaxed">Jointoiement, enduit et ponçage jusqu'au niveau Q4 : des surfaces parfaitement prêtes à peindre.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== PROCESS / TIMELINE ===================== -->
-<section id="process" class="py-24 sm:py-32 bg-sand/60 border-y border-line">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="text-center mb-16">
-      <span class="font-mono text-xs tracking-widest text-sage-deep" data-reveal>02 — LA MÉTHODE</span>
-      <h2 class="mt-3 font-display font-bold text-4xl sm:text-6xl tracking-tight" data-reveal data-delay="1">De la visite au coup de pinceau,<br/>cinq étapes maîtrisées.</h2>
-    </div>
-
-    <div class="relative max-w-4xl mx-auto">
-      <!-- animated vertical line -->
-      <svg class="absolute left-[27px] md:left-1/2 md:-translate-x-1/2 top-0 h-full w-2" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true">
-        <line x1="1" y1="0" x2="1" y2="100" stroke="#D2CEC4" stroke-width="2"/>
-        <line class="draw" style="--len:100" x1="1" y1="0" x2="1" y2="100" stroke="#5C7253" stroke-width="2"/>
-      </svg>
-
-      <div class="space-y-10">
-        <!-- step -->
-        <div class="tl-item relative md:grid md:grid-cols-2 md:gap-12 items-center" data-reveal>
-          <div class="pl-16 md:pl-0 md:text-right md:pr-12">
-            <span class="font-mono text-xs text-clay tracking-widest">ÉTAPE 01</span>
-            <h3 class="font-display font-semibold text-2xl mt-1">Visite & écoute</h3>
-            <p class="text-slate mt-2">Un rendez-vous sur place pour comprendre l'usage, prendre les mesures et cerner vos contraintes.</p>
-          </div>
-          <span class="tl-dot absolute left-[19px] md:left-1/2 md:-translate-x-1/2 top-1 w-5 h-5 rounded-full bg-sage border-4 border-plaster"></span>
-          <div class="hidden md:block"></div>
-        </div>
-
-        <div class="tl-item relative md:grid md:grid-cols-2 md:gap-12 items-center" data-reveal>
-          <div class="hidden md:block"></div>
-          <span class="tl-dot absolute left-[19px] md:left-1/2 md:-translate-x-1/2 top-1 w-5 h-5 rounded-full bg-sage border-4 border-plaster"></span>
-          <div class="pl-16 md:pl-12">
-            <span class="font-mono text-xs text-clay tracking-widest">ÉTAPE 02</span>
-            <h3 class="font-display font-semibold text-2xl mt-1">Devis détaillé</h3>
-            <p class="text-slate mt-2">Un chiffrage clair, ligne par ligne, sans surprise. Matériaux, délais et budget posés noir sur blanc.</p>
+      <!-- MAISON NOIR -->
+      <a href="restaurant/" target="_blank" rel="noopener" class="proj acc-gold rounded-3xl bg-card block group" data-reveal data-hover aria-label="Ouvrir la démo Maison Noir — restaurant gastronomique">
+        <div class="pv aspect-[16/10] rounded-t-3xl" data-src="restaurant/">
+          <div class="cover" style="background:radial-gradient(120% 100% at 70% 20%, rgba(201,162,75,.25), transparent 55%), linear-gradient(160deg,#141210,#0A0908)">
+            <span class="serif italic text-4xl" style="color:#C9A24B">Maison Noir</span>
           </div>
         </div>
-
-        <div class="tl-item relative md:grid md:grid-cols-2 md:gap-12 items-center" data-reveal>
-          <div class="pl-16 md:pl-0 md:text-right md:pr-12">
-            <span class="font-mono text-xs text-clay tracking-widest">ÉTAPE 03</span>
-            <h3 class="font-display font-semibold text-2xl mt-1">Préparation & protection</h3>
-            <p class="text-slate mt-2">Sols et meubles bâchés, chantier organisé. On travaille proprement, chez vous comme chez soi.</p>
+        <div class="p-7">
+          <div class="flex items-center justify-between gap-4 mb-3">
+            <h3 class="font-medium text-2xl tracking-tight">Maison Noir</h3>
+            <span class="eyebrow text-[9px]" style="color:#C9A24B">Restaurant gastronomique</span>
           </div>
-          <span class="tl-dot absolute left-[19px] md:left-1/2 md:-translate-x-1/2 top-1 w-5 h-5 rounded-full bg-sage border-4 border-plaster"></span>
-          <div class="hidden md:block"></div>
-        </div>
-
-        <div class="tl-item relative md:grid md:grid-cols-2 md:gap-12 items-center" data-reveal>
-          <div class="hidden md:block"></div>
-          <span class="tl-dot absolute left-[19px] md:left-1/2 md:-translate-x-1/2 top-1 w-5 h-5 rounded-full bg-sage border-4 border-plaster"></span>
-          <div class="pl-16 md:pl-12">
-            <span class="font-mono text-xs text-clay tracking-widest">ÉTAPE 04</span>
-            <h3 class="font-display font-semibold text-2xl mt-1">Pose & isolation</h3>
-            <p class="text-slate mt-2">Ossatures, plaques, isolant : tout est monté droit, vissé et ajusté au millimètre.</p>
+          <p class="text-muted text-[15px] leading-relaxed mb-5">Luxe nocturne et théâtral : noir profond, or champagne, typographie haute couture. Scroll-telling en trois actes, menus dégustation en onglets, galerie en tilt 3D.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Scroll-telling épinglé</span><span class="chip">Tilt 3D</span><span class="chip">Parallaxe</span>
+          </div>
+          <div class="mt-6 inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3.5 transition-all" style="color:#C9A24B">
+            Voir la démo
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
         </div>
+      </a>
 
-        <div class="tl-item relative md:grid md:grid-cols-2 md:gap-12 items-center" data-reveal>
-          <div class="pl-16 md:pl-0 md:text-right md:pr-12">
-            <span class="font-mono text-xs text-clay tracking-widest">ÉTAPE 05</span>
-            <h3 class="font-display font-semibold text-2xl mt-1">Finitions & livraison</h3>
-            <p class="text-slate mt-2">Bandes, enduits, ponçage et nettoyage. Vous récupérez une pièce prête à peindre.</p>
+      <!-- MAS DES OLIVIERS -->
+      <a href="gite/" target="_blank" rel="noopener" class="proj acc-terra rounded-3xl bg-card block group" data-reveal data-d="1" data-hover aria-label="Ouvrir la démo Mas des Oliviers — maison d'hôtes">
+        <div class="pv aspect-[16/10] rounded-t-3xl" data-src="gite/">
+          <div class="cover" style="background:radial-gradient(120% 100% at 30% 20%, rgba(190,106,71,.3), transparent 55%), linear-gradient(160deg,#1A1512,#0E0B09)">
+            <span class="serif italic text-4xl" style="color:#BE6A47">Mas des Oliviers</span>
           </div>
-          <span class="tl-dot absolute left-[19px] md:left-1/2 md:-translate-x-1/2 top-1 w-5 h-5 rounded-full bg-clay border-4 border-plaster"></span>
-          <div class="hidden md:block"></div>
+        </div>
+        <div class="p-7">
+          <div class="flex items-center justify-between gap-4 mb-3">
+            <h3 class="font-medium text-2xl tracking-tight">Mas des Oliviers</h3>
+            <span class="eyebrow text-[9px]" style="color:#BE6A47">Maison d'hôtes · Provence</span>
+          </div>
+          <p class="text-muted text-[15px] leading-relaxed mb-5">Luxe rural et lumière dorée : pierre blonde, terracotta, oliviers. Sélecteur de chambres interactif, hero parallaxe, avis voyageurs, réservation.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Sélecteur interactif</span><span class="chip">Parallaxe</span><span class="chip">Tilt 3D</span>
+          </div>
+          <div class="mt-6 inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3.5 transition-all" style="color:#BE6A47">
+            Voir la démo
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- NOVA -->
+      <a href="saas/" target="_blank" rel="noopener" class="proj acc-violet rounded-3xl bg-card block group" data-reveal data-hover aria-label="Ouvrir la démo Nova — landing SaaS">
+        <div class="pv aspect-[16/10] rounded-t-3xl" data-src="saas/">
+          <div class="cover" style="background:radial-gradient(120% 100% at 70% 25%, rgba(139,92,246,.35), transparent 55%), radial-gradient(100% 100% at 20% 80%, rgba(34,211,238,.18), transparent 55%), linear-gradient(160deg,#0E0E1C,#07070E)">
+            <span class="font-medium text-4xl tracking-tight" style="color:#A78BFA">nova<span style="color:#22D3EE">*</span></span>
+          </div>
+        </div>
+        <div class="p-7">
+          <div class="flex items-center justify-between gap-4 mb-3">
+            <h3 class="font-medium text-2xl tracking-tight">Nova</h3>
+            <span class="eyebrow text-[9px]" style="color:#A78BFA">SaaS · Analytics IA</span>
+          </div>
+          <p class="text-muted text-[15px] leading-relaxed mb-5">Esthétique « aurora » : galaxie de particules 3D interactive (Three.js), sections épinglées, défilement horizontal, dashboard animé, smooth scroll Lenis.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Three.js</span><span class="chip">GSAP + ScrollTrigger</span><span class="chip">Lenis</span>
+          </div>
+          <div class="mt-6 inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3.5 transition-all" style="color:#A78BFA">
+            Voir la démo
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- LAURENT UDOL -->
+      <a href="plaquiste/" target="_blank" rel="noopener" class="proj acc-sage rounded-3xl bg-card block group" data-reveal data-d="1" data-hover aria-label="Ouvrir la démo Laurent Udol — artisan plaquiste">
+        <div class="pv aspect-[16/10] rounded-t-3xl" data-src="plaquiste/">
+          <div class="cover" style="background:radial-gradient(120% 100% at 30% 25%, rgba(121,145,111,.3), transparent 55%), linear-gradient(160deg,#151612,#0B0C0A)">
+            <span class="font-medium text-4xl tracking-tight" style="color:#9FB694">Laurent Udol</span>
+          </div>
+        </div>
+        <div class="p-7">
+          <div class="flex items-center justify-between gap-4 mb-3">
+            <h3 class="font-medium text-2xl tracking-tight">Laurent Udol</h3>
+            <span class="eyebrow text-[9px]" style="color:#9FB694">Artisan plaquiste · Caen</span>
+          </div>
+          <p class="text-muted text-[15px] leading-relaxed mb-5">Identité « plâtre & sauge », chaleureuse et artisanale. Comparateur avant/après à glisser, timeline de chantier animée, carte de zone d'intervention.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Slider avant/après</span><span class="chip">Timeline animée</span><span class="chip">SVG sur-mesure</span>
+          </div>
+          <div class="mt-6 inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3.5 transition-all" style="color:#9FB694">
+            Voir la démo
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <p class="mt-8 text-center font-mono text-[11px] text-dim tracking-wider" data-reveal>LES VIGNETTES SONT LES SITES RÉELS, EN DIRECT — PAS DES CAPTURES D'ÉCRAN.</p>
+  </div>
+</section>
+
+<!-- APPROCHE -->
+<section id="approche" class="py-24 sm:py-32 border-y border-[var(--line)] bg-ink-2/60">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-5">
+        <p class="eyebrow text-gold mb-5" data-reveal>L'approche</p>
+        <h2 class="font-medium text-[clamp(2rem,4.8vw,3.6rem)] leading-[1.05] tracking-tight" data-reveal data-d="1">Un site n'est pas<br/>un modèle <em class="serif italic font-normal">rempli.</em></h2>
+        <p class="mt-6 text-muted leading-relaxed" data-reveal data-d="2">Chaque secteur a ses codes, ses clients, sa lumière. Mon travail : les traduire en une expérience web qui donne immédiatement confiance — et envie.</p>
+      </div>
+      <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
+        <div class="rounded-2xl border border-[var(--line)] p-6" data-reveal data-hover>
+          <div class="font-mono text-xs text-gold mb-3">01</div>
+          <h3 class="font-medium text-lg mb-2">Direction artistique dédiée</h3>
+          <p class="text-muted text-sm leading-relaxed">Palette, typographies, ambiance et animations choisies pour votre secteur. Deux pistes proposées avant la première ligne de code.</p>
+        </div>
+        <div class="rounded-2xl border border-[var(--line)] p-6" data-reveal data-d="1" data-hover>
+          <div class="font-mono text-xs text-terra mb-3">02</div>
+          <h3 class="font-medium text-lg mb-2">Contenu crédible</h3>
+          <p class="text-muted text-sm leading-relaxed">Textes travaillés, structure pensée pour convertir : preuve sociale, parcours clair, appels à l'action au bon endroit.</p>
+        </div>
+        <div class="rounded-2xl border border-[var(--line)] p-6" data-reveal data-hover>
+          <div class="font-mono text-xs text-violet mb-3">03</div>
+          <h3 class="font-medium text-lg mb-2">Interactions signatures</h3>
+          <p class="text-muted text-sm leading-relaxed">Scroll-telling, 3D, sliders, micro-animations : au moins un moment mémorable par site — jamais gratuit, toujours au service du propos.</p>
+        </div>
+        <div class="rounded-2xl border border-[var(--line)] p-6" data-reveal data-d="1" data-hover>
+          <div class="font-mono text-xs text-sage mb-3">04</div>
+          <h3 class="font-medium text-lg mb-2">Solide par défaut</h3>
+          <p class="text-muted text-sm leading-relaxed">Mobile-first, rapide, accessible (contrastes, clavier, reduced-motion). Beau partout, robuste même quand tout ne charge pas.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== AVANT / APRES ===================== -->
-<section id="avant-apres" class="py-24 sm:py-32">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center">
-    <div>
-      <span class="font-mono text-xs tracking-widest text-sage-deep" data-reveal>03 — AVANT / APRÈS</span>
-      <h2 class="mt-3 font-display font-bold text-4xl sm:text-6xl tracking-tight" data-reveal data-delay="1">Le grain brut<br/>devient surface nette.</h2>
-      <p class="mt-5 text-slate text-lg max-w-md" data-reveal data-delay="2">Faites glisser le curseur pour révéler la transformation : d'une cloison en cours de montage à une finition lisse, prête à recevoir la peinture.</p>
-      <ul class="mt-8 space-y-3" data-reveal data-delay="3">
-        <li class="flex items-center gap-3"><span class="grid place-items-center w-6 h-6 rounded-full bg-sage-tint text-sage-deep"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-slate">Surfaces planes, angles vifs</span></li>
-        <li class="flex items-center gap-3"><span class="grid place-items-center w-6 h-6 rounded-full bg-sage-tint text-sage-deep"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-slate">Joints invisibles, finition Q4</span></li>
-        <li class="flex items-center gap-3"><span class="grid place-items-center w-6 h-6 rounded-full bg-sage-tint text-sage-deep"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-slate">Chantier nettoyé, prêt à vivre</span></li>
-      </ul>
-    </div>
-
-    <div class="ba rounded-3xl border border-line shadow-2xl aspect-[4/3]" id="baSlider" data-hover>
-      <!-- BEFORE -->
-      <div class="absolute inset-0">
-        <svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Avant : cloison en plaques de plâtre brutes avec joints apparents.">
-          <rect width="400" height="300" fill="#E2DDD2"/>
-          <g stroke="#CFC9BD" stroke-width="3">
-            <line x1="133" y1="0" x2="133" y2="300"/><line x1="266" y1="0" x2="266" y2="300"/><line x1="0" y1="150" x2="400" y2="150"/>
-          </g>
-          <g fill="#B9B3A6"><circle cx="133" cy="60" r="3"/><circle cx="133" cy="220" r="3"/><circle cx="266" cy="90" r="3"/><circle cx="266" cy="240" r="3"/></g>
-          <g stroke="#C2BCAF" stroke-width="6" stroke-linecap="round" opacity=".7"><line x1="120" y1="150" x2="146" y2="150"/><line x1="253" y1="150" x2="279" y2="150"/></g>
-        </svg>
-      </div>
-      <!-- AFTER -->
-      <div class="ba-after" id="baAfter">
-        <svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Après : mur lisse et fini, prêt à peindre, avec éclairage chaleureux.">
-          <defs><linearGradient id="fin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBFAF7"/><stop offset="1" stop-color="#EFEDE7"/></linearGradient>
-            <radialGradient id="glow" cx="72%" cy="30%" r="60%"><stop offset="0" stop-color="#FFF6E6" stop-opacity=".85"/><stop offset="1" stop-color="#FFF6E6" stop-opacity="0"/></radialGradient></defs>
-          <rect width="400" height="300" fill="url(#fin)"/>
-          <rect width="400" height="300" fill="url(#glow)"/>
-          <!-- framed picture + sconce as styling -->
-          <rect x="250" y="70" width="90" height="120" rx="4" fill="#fff" stroke="#D2CEC4"/>
-          <rect x="262" y="82" width="66" height="96" fill="#E7ECE1"/>
-          <circle cx="92" cy="84" r="16" fill="#F0E6D6"/><rect x="88" y="84" width="8" height="70" fill="#D9CFBE"/>
-        </svg>
-      </div>
-      <div class="ba-handle" id="baHandle">
-        <div class="ba-grip">
-          <svg class="w-5 h-5 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 7 4 12l5 5M15 7l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-      </div>
-      <span class="ba-tag left-3">AVANT</span>
-      <span class="ba-tag right-3">APRÈS</span>
-    </div>
+<!-- CONTACT -->
+<section id="contact" class="relative py-28 sm:py-40 overflow-hidden">
+  <div class="absolute inset-0 -z-10" aria-hidden="true">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full blur-3xl opacity-20" style="background:radial-gradient(circle,#C9A24B,transparent 65%)"></div>
   </div>
-</section>
-
-<!-- ===================== ISOLATION FEATURE ===================== -->
-<section class="py-24 sm:py-32 bg-ink text-plaster overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-14 items-center">
-    <div class="relative order-2 lg:order-1" data-reveal>
-      <svg viewBox="0 0 420 360" class="w-full max-w-md mx-auto" role="img" aria-label="Coupe d'un mur isolé montrant les couches d'isolant thermique et la diffusion de chaleur.">
-        <defs>
-          <linearGradient id="therm" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B86B4B"/><stop offset=".5" stop-color="#C9A24B"/><stop offset="1" stop-color="#79916F"/></linearGradient>
-        </defs>
-        <rect x="20" y="30" width="60" height="300" fill="#2E2A24"/>
-        <rect x="80" y="30" width="80" height="300" fill="url(#therm)" opacity=".85"/>
-        <!-- insulation wavy layers -->
-        <g stroke="#F6F4EF" stroke-width="2" fill="none" opacity=".5">
-          <path d="M90 40 q10 12 0 24 q-10 12 0 24 q10 12 0 24 q-10 12 0 24 q10 12 0 24 q-10 12 0 24 q10 12 0 24 q-10 12 0 24 q10 12 0 24 q-10 12 0 24"/>
-          <path d="M120 40 q10 12 0 24 q-10 12 0 24 q10 12 0 24 q-10 12 0 24 q10 12 0 24 q-10 12 0 24 q10 12 0 24 q-10 12 0 24 q10 12 0 24 q-10 12 0 24"/>
-        </g>
-        <rect x="160" y="30" width="18" height="300" fill="#3A352D"/>
-        <rect x="178" y="30" width="120" height="300" fill="#F6F4EF"/>
-        <!-- heat waves -->
-        <g class="float-a" stroke="#C9A24B" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8">
-          <path d="M300 90 q14 -16 28 0 q14 16 28 0"/>
-          <path d="M300 180 q14 -16 28 0 q14 16 28 0"/>
-          <path d="M300 270 q14 -16 28 0 q14 16 28 0"/>
-        </g>
-        <text x="300" y="345" fill="#9A958B" font-family="JetBrains Mono" font-size="13">21°C</text>
-        <text x="24" y="345" fill="#9A958B" font-family="JetBrains Mono" font-size="13">Ext.</text>
-      </svg>
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+    <p class="eyebrow text-gold mb-6" data-reveal>Contact</p>
+    <h2 class="font-medium tracking-[-0.02em] leading-[1.05] text-[clamp(2.4rem,6.5vw,5rem)]" data-reveal data-d="1">Un projet en tête ?<br/><em class="serif italic font-normal">Parlons-en.</em></h2>
+    <p class="mt-6 text-lg text-muted max-w-xl mx-auto" data-reveal data-d="2">Site vitrine, refonte, landing produit — je réponds sous 24 h avec un premier avis honnête et une estimation.</p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4" data-reveal data-d="3">
+      <a href="mailto:timothee.ravache14@gmail.com" class="btn-cream font-semibold text-lg px-9 py-4.5 rounded-full inline-flex items-center gap-3 py-4" data-hover>
+        timothee.ravache14@gmail.com
+      </a>
+      <a href="#" class="btn-ghost font-medium px-8 py-4 rounded-full" data-hover>Profil Malt</a>
     </div>
-
-    <div class="order-1 lg:order-2">
-      <span class="font-mono text-xs tracking-widest text-clay" data-reveal>04 — ISOLATION</span>
-      <h2 class="mt-3 font-display font-bold text-4xl sm:text-6xl tracking-tight" data-reveal data-delay="1">Isoler, c'est gagner<br/>du confort toute l'année.</h2>
-      <p class="mt-5 text-plaster/70 text-lg max-w-md" data-reveal data-delay="2">Une isolation bien posée, c'est une maison plus fraîche l'été, plus chaude l'hiver, et des factures qui baissent durablement.</p>
-      <div class="mt-10 grid sm:grid-cols-2 gap-px bg-plaster/15 rounded-2xl overflow-hidden border border-plaster/15" data-reveal data-delay="3">
-        <div class="bg-ink p-6"><div class="font-display font-bold text-4xl text-clay"><span class="count" data-to="30">0</span><span>%</span></div><div class="font-mono text-[11px] text-plaster/60 tracking-wider mt-2">D'ÉCONOMIES DE CHAUFFAGE*</div></div>
-        <div class="bg-ink p-6"><div class="font-display font-bold text-4xl text-sage"><span class="count" data-to="2">0</span><span>×</span></div><div class="font-mono text-[11px] text-plaster/60 tracking-wider mt-2">MOINS DE BRUIT PERÇU</div></div>
-        <div class="bg-ink p-6"><div class="font-display font-bold text-4xl"><span class="count" data-to="7">0</span></div><div class="font-mono text-[11px] text-plaster/60 tracking-wider mt-2">JOURS DE CHANTIER MOYEN</div></div>
-        <div class="bg-ink p-6"><div class="font-display font-bold text-4xl">RGE</div><div class="font-mono text-[11px] text-plaster/60 tracking-wider mt-2">ÉLIGIBLE AUX AIDES</div></div>
-      </div>
-      <p class="mt-4 font-mono text-[10px] text-plaster/40">*Estimation indicative selon l'état initial du logement.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== REALISATIONS / GALLERY ===================== -->
-<section id="realisations" class="py-24 sm:py-32">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-      <div>
-        <span class="font-mono text-xs tracking-widest text-sage-deep" data-reveal>05 — RÉALISATIONS</span>
-        <h2 class="mt-3 font-display font-bold text-4xl sm:text-6xl tracking-tight" data-reveal data-delay="1">Le travail en images.</h2>
-      </div>
-      <p class="md:max-w-xs text-slate" data-reveal data-delay="2">Quelques chantiers menés à Caen et dans le Calvados — survolez pour le détail.</p>
-    </div>
-
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[200px]">
-      <!-- tiles -->
-      <div class="tile rounded-3xl border border-line row-span-2 col-span-2 lg:col-span-2" data-reveal data-hover>
-        <svg viewBox="0 0 600 400" class="w-full h-full" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Salon avec cloison séparative et faux-plafond à éclairage indirect.">
-          <rect width="600" height="400" fill="#EFEDE7"/>
-          <rect x="0" y="0" width="600" height="120" fill="#E7E3DA"/>
-          <rect x="40" y="120" width="220" height="280" fill="#F6F4EF" stroke="#E0DBD0"/>
-          <rect x="300" y="40" width="260" height="40" rx="6" fill="#fff"/><rect x="330" y="50" width="200" height="20" rx="4" fill="#FFF1D8"/>
-          <rect x="320" y="150" width="240" height="210" rx="8" fill="#E7ECE1"/>
-          <circle cx="120" cy="260" r="6" fill="#B86B4B"/>
-        </svg>
-        <div class="cap"><div class="font-display font-semibold text-plaster">Salon — Caen centre</div><div class="font-mono text-[10px] text-plaster/70 tracking-wide">CLOISON + FAUX-PLAFOND LED</div></div>
-      </div>
-      <div class="tile rounded-3xl border border-line" data-reveal data-delay="1" data-hover>
-        <svg viewBox="0 0 300 220" class="w-full h-full" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Combles aménagés sous rampants.">
-          <rect width="300" height="220" fill="#ECE9E2"/><polygon points="0,90 150,10 300,90 300,220 0,220" fill="#F6F4EF"/><polygon points="0,90 150,10 300,90 150,90" fill="#E7E3DA"/><rect x="120" y="120" width="60" height="100" fill="#E7ECE1"/>
-        </svg>
-        <div class="cap"><div class="font-display font-semibold text-plaster">Combles — Hérouville</div><div class="font-mono text-[10px] text-plaster/70 tracking-wide">ISOLATION + AMÉNAGEMENT</div></div>
-      </div>
-      <div class="tile rounded-3xl border border-line" data-reveal data-delay="2" data-hover>
-        <svg viewBox="0 0 300 220" class="w-full h-full" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Niche décorative en placo avec éclairage.">
-          <rect width="300" height="220" fill="#E7E3DA"/><rect x="90" y="30" width="120" height="160" rx="6" fill="#F6F4EF" stroke="#D2CEC4"/><rect x="110" y="55" width="80" height="50" fill="#FFF1D8"/><rect x="110" y="120" width="80" height="45" fill="#E7ECE1"/>
-        </svg>
-        <div class="cap"><div class="font-display font-semibold text-plaster">Niche sur-mesure</div><div class="font-mono text-[10px] text-plaster/70 tracking-wide">AGENCEMENT PLACO</div></div>
-      </div>
-      <div class="tile rounded-3xl border border-line col-span-2" data-reveal data-hover>
-        <svg viewBox="0 0 600 220" class="w-full h-full" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Mur fini prêt à peindre, lumière rasante mettant en valeur la planéité.">
-          <defs><linearGradient id="raking" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FBFAF7"/><stop offset="1" stop-color="#E7E3DA"/></linearGradient></defs>
-          <rect width="600" height="220" fill="url(#raking)"/><rect x="0" y="170" width="600" height="50" fill="#E0DBD0"/><circle cx="500" cy="60" r="40" fill="#FFF1D8" opacity=".7"/>
-        </svg>
-        <div class="cap"><div class="font-display font-semibold text-plaster">Finition Q4 — Ifs</div><div class="font-mono text-[10px] text-plaster/70 tracking-wide">BANDES & ENDUIT</div></div>
-      </div>
-      <div class="tile rounded-3xl border border-line" data-reveal data-delay="1" data-hover>
-        <svg viewBox="0 0 300 220" class="w-full h-full" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Doublage isolant d'un mur extérieur.">
-          <rect width="300" height="220" fill="#ECE9E2"/><rect x="0" y="0" width="80" height="220" fill="#D9CFBE"/><rect x="80" y="0" width="40" height="220" fill="url(#therm)" opacity=".7"/><rect x="120" y="0" width="180" height="220" fill="#F6F4EF"/>
-        </svg>
-        <div class="cap"><div class="font-display font-semibold text-plaster">Doublage — Bayeux</div><div class="font-mono text-[10px] text-plaster/70 tracking-wide">ISOLATION THERMIQUE</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== ZONE / MAP ===================== -->
-<section id="zone" class="py-24 sm:py-32 bg-sand/60 border-y border-line">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-14 items-center">
-    <div>
-      <span class="font-mono text-xs tracking-widest text-sage-deep" data-reveal>06 — ZONE D'INTERVENTION</span>
-      <h2 class="mt-3 font-display font-bold text-4xl sm:text-6xl tracking-tight" data-reveal data-delay="1">Caen et tout<br/>le Calvados.</h2>
-      <p class="mt-5 text-slate text-lg max-w-md" data-reveal data-delay="2">Basé à Caen, j'interviens dans un rayon couvrant l'ensemble du département : Hérouville-Saint-Clair, Ifs, Bayeux, Lisieux, la côte de Nacre et au-delà.</p>
-      <div class="mt-8 flex flex-wrap gap-2.5" data-reveal data-delay="3">
-        <span class="rounded-full border border-line bg-white/70 px-4 py-1.5 text-sm">Caen</span>
-        <span class="rounded-full border border-line bg-white/70 px-4 py-1.5 text-sm">Hérouville-St-Clair</span>
-        <span class="rounded-full border border-line bg-white/70 px-4 py-1.5 text-sm">Ifs</span>
-        <span class="rounded-full border border-line bg-white/70 px-4 py-1.5 text-sm">Bayeux</span>
-        <span class="rounded-full border border-line bg-white/70 px-4 py-1.5 text-sm">Lisieux</span>
-        <span class="rounded-full border border-line bg-white/70 px-4 py-1.5 text-sm">Ouistreham</span>
-        <span class="rounded-full border border-line bg-white/70 px-4 py-1.5 text-sm">Falaise</span>
-      </div>
-    </div>
-
-    <div class="relative" data-reveal data-delay="2" data-hover>
-      <svg viewBox="0 0 460 360" class="w-full max-w-lg mx-auto" role="img" aria-label="Carte stylisée du Calvados avec les zones d'intervention autour de Caen.">
-        <defs><radialGradient id="cov" cx="46%" cy="48%" r="46%"><stop offset="0" stop-color="#79916F" stop-opacity=".28"/><stop offset="1" stop-color="#79916F" stop-opacity="0"/></radialGradient></defs>
-        <!-- stylised department shape -->
-        <path d="M40 120 C 90 70 160 60 230 70 C 300 80 380 70 420 110 C 430 160 420 220 400 260 C 350 300 280 310 210 300 C 150 292 90 300 56 260 C 36 220 30 160 40 120 Z" fill="#EDEAE2" stroke="#D2CEC4" stroke-width="2"/>
-        <!-- coastline accent (top) -->
-        <path d="M40 120 C 90 70 160 60 230 70 C 300 80 380 70 420 110" fill="none" stroke="#79916F" stroke-width="3" stroke-linecap="round" class="draw" style="--len:520"/>
-        <circle cx="215" cy="185" r="120" fill="url(#cov)"/>
-        <!-- markers -->
-        <g class="mk"><circle class="ping" cx="215" cy="185" r="5" fill="#B86B4B"/><circle cx="215" cy="185" r="7" fill="#B86B4B"/><text x="226" y="180" font-family="JetBrains Mono" font-size="13" fill="#221F1B">Caen</text></g>
-        <g class="mk"><circle cx="245" cy="160" r="4" fill="#5C7253"/><text x="254" y="156" font-family="JetBrains Mono" font-size="10" fill="#6E6A61">Hérouville</text></g>
-        <g class="mk"><circle cx="120" cy="160" r="4" fill="#5C7253"/><text x="60" y="156" font-family="JetBrains Mono" font-size="10" fill="#6E6A61">Bayeux</text></g>
-        <g class="mk"><circle cx="330" cy="200" r="4" fill="#5C7253"/><text x="338" y="196" font-family="JetBrains Mono" font-size="10" fill="#6E6A61">Lisieux</text></g>
-        <g class="mk"><circle cx="225" cy="120" r="4" fill="#5C7253"/><text x="234" y="116" font-family="JetBrains Mono" font-size="10" fill="#6E6A61">Ouistreham</text></g>
-        <g class="mk"><circle cx="200" cy="270" r="4" fill="#5C7253"/><text x="150" y="288" font-family="JetBrains Mono" font-size="10" fill="#6E6A61">Falaise</text></g>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== TESTIMONIALS ===================== -->
-<section class="py-24 sm:py-32">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-    <span class="font-mono text-xs tracking-widest text-sage-deep" data-reveal>ILS ONT FAIT CONFIANCE</span>
-    <figure class="mt-8" data-reveal data-delay="1">
-      <div class="flex justify-center gap-1 mb-6 text-clay" aria-label="Note 5 sur 5">
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
-      </div>
-      <blockquote class="font-display font-medium text-2xl sm:text-4xl leading-tight tracking-tight">
-        « Laurent a transformé nos combles en une vraie chambre. Travail soigné, délais respectés, chantier nickel. On recommande les yeux fermés. »
-      </blockquote>
-      <figcaption class="mt-8 flex items-center justify-center gap-3">
-        <span class="grid place-items-center w-11 h-11 rounded-full bg-sage text-white font-display font-semibold">M&J</span>
-        <span class="text-left"><span class="block font-semibold">Marie & Julien</span><span class="block font-mono text-[11px] text-slate tracking-wide">HÉROUVILLE-SAINT-CLAIR</span></span>
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ===================== CONTACT ===================== -->
-<section id="contact" class="py-24 sm:py-32 bg-ink text-plaster">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-14">
-    <div>
-      <span class="font-mono text-xs tracking-widest text-clay" data-reveal>07 — CONTACT</span>
-      <h2 class="mt-3 font-display font-bold text-4xl sm:text-6xl tracking-tight" data-reveal data-delay="1">Parlons de<br/>votre projet.</h2>
-      <p class="mt-5 text-plaster/70 text-lg max-w-md" data-reveal data-delay="2">Une cloison à monter, des combles à isoler, un mur à reprendre ? Décrivez votre projet, je reviens vers vous sous 48 h avec un premier retour.</p>
-
-      <div class="mt-10 space-y-5" data-reveal data-delay="3">
-        <a href="mailto:contact@laurent-udol.fr" class="group flex items-center gap-4" data-hover>
-          <span class="grid place-items-center w-12 h-12 rounded-2xl bg-plaster/10 group-hover:bg-clay transition-colors"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
-          <span><span class="block font-mono text-[11px] text-plaster/50 tracking-wider">EMAIL</span><span class="font-display text-lg">contact@laurent-udol.fr</span></span>
-        </a>
-        <div class="flex items-center gap-4">
-          <span class="grid place-items-center w-12 h-12 rounded-2xl bg-plaster/10"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
-          <span><span class="block font-mono text-[11px] text-plaster/50 tracking-wider">SECTEUR</span><span class="font-display text-lg">Caen & Calvados (14)</span></span>
-        </div>
-        <div class="flex items-center gap-4">
-          <span class="grid place-items-center w-12 h-12 rounded-2xl bg-plaster/10"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg></span>
-          <span><span class="block font-mono text-[11px] text-plaster/50 tracking-wider">DISPONIBILITÉ</span><span class="font-display text-lg">Lun – Sam · 8h – 19h</span></span>
-        </div>
-      </div>
-    </div>
-
-    <form class="rounded-3xl border border-plaster/15 bg-plaster/[0.04] p-6 sm:p-8" data-reveal data-delay="2" id="contactForm" novalidate>
-      <div class="grid sm:grid-cols-2 gap-5">
-        <div>
-          <label for="nom" class="block font-mono text-[11px] text-plaster/60 tracking-wider mb-2">NOM</label>
-          <input id="nom" name="nom" type="text" required class="w-full rounded-xl bg-plaster/[0.06] border border-plaster/20 px-4 py-3 text-plaster placeholder-plaster/30 outline-none focus:border-clay focus:ring-2 focus:ring-clay/30 transition" placeholder="Votre nom" />
-        </div>
-        <div>
-          <label for="tel" class="block font-mono text-[11px] text-plaster/60 tracking-wider mb-2">TÉLÉPHONE</label>
-          <input id="tel" name="tel" type="tel" class="w-full rounded-xl bg-plaster/[0.06] border border-plaster/20 px-4 py-3 text-plaster placeholder-plaster/30 outline-none focus:border-clay focus:ring-2 focus:ring-clay/30 transition" placeholder="06 00 00 00 00" />
-        </div>
-      </div>
-      <div class="mt-5">
-        <label for="email" class="block font-mono text-[11px] text-plaster/60 tracking-wider mb-2">EMAIL</label>
-        <input id="email" name="email" type="email" required class="w-full rounded-xl bg-plaster/[0.06] border border-plaster/20 px-4 py-3 text-plaster placeholder-plaster/30 outline-none focus:border-clay focus:ring-2 focus:ring-clay/30 transition" placeholder="vous@exemple.fr" />
-      </div>
-      <div class="mt-5">
-        <label for="projet" class="block font-mono text-[11px] text-plaster/60 tracking-wider mb-2">TYPE DE PROJET</label>
-        <select id="projet" name="projet" class="w-full rounded-xl bg-plaster/[0.06] border border-plaster/20 px-4 py-3 text-plaster outline-none focus:border-clay focus:ring-2 focus:ring-clay/30 transition">
-          <option class="text-ink">Cloisons & doublages</option>
-          <option class="text-ink">Faux-plafonds</option>
-          <option class="text-ink">Isolation thermique & acoustique</option>
-          <option class="text-ink">Aménagement de combles</option>
-          <option class="text-ink">Agencements sur-mesure</option>
-          <option class="text-ink">Bandes & finitions</option>
-          <option class="text-ink">Autre / je ne sais pas encore</option>
-        </select>
-      </div>
-      <div class="mt-5">
-        <label for="message" class="block font-mono text-[11px] text-plaster/60 tracking-wider mb-2">VOTRE PROJET</label>
-        <textarea id="message" name="message" rows="4" class="w-full rounded-xl bg-plaster/[0.06] border border-plaster/20 px-4 py-3 text-plaster placeholder-plaster/30 outline-none focus:border-clay focus:ring-2 focus:ring-clay/30 transition resize-none" placeholder="Décrivez la pièce, la surface, vos délais…"></textarea>
-      </div>
-      <button type="submit" class="magnetic mt-7 w-full group inline-flex items-center justify-center gap-3 rounded-2xl bg-clay text-plaster px-7 py-4 font-medium hover:bg-clay-deep transition-colors duration-300" data-hover>
-        <span id="submitLabel">Envoyer ma demande</span>
-        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <p class="mt-4 text-center font-mono text-[10px] text-plaster/40">Devis gratuit et sans engagement · Réponse sous 48 h</p>
-    </form>
   </div>
 </section>
 </main>
 
-<!-- ===================== FOOTER ===================== -->
-<footer class="bg-ink text-plaster border-t border-plaster/10 pt-16 pb-10">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="grid md:grid-cols-12 gap-10">
-      <div class="md:col-span-5">
-        <a href="#top" class="flex items-center gap-3 mb-5" data-hover>
-          <span class="grid place-items-center w-11 h-11 rounded-xl bg-plaster text-ink font-display font-bold text-lg">LU</span>
-          <span class="font-display font-semibold text-lg">Laurent Udol</span>
-        </a>
-        <p class="text-plaster/60 max-w-sm">Artisan plaquiste indépendant à Caen. Cloisons, faux-plafonds, isolation et finitions, du premier rendez-vous à la livraison.</p>
-      </div>
-      <nav class="md:col-span-3" aria-label="Plan du site">
-        <h3 class="font-mono text-[11px] tracking-wider text-plaster/40 mb-4">NAVIGATION</h3>
-        <ul class="space-y-2.5">
-          <li><a href="#services" class="text-plaster/80 hover:text-clay transition" data-hover>Métiers</a></li>
-          <li><a href="#process" class="text-plaster/80 hover:text-clay transition" data-hover>Méthode</a></li>
-          <li><a href="#realisations" class="text-plaster/80 hover:text-clay transition" data-hover>Réalisations</a></li>
-          <li><a href="#zone" class="text-plaster/80 hover:text-clay transition" data-hover>Zone</a></li>
-        </ul>
-      </nav>
-      <div class="md:col-span-4">
-        <h3 class="font-mono text-[11px] tracking-wider text-plaster/40 mb-4">CONTACT</h3>
-        <a href="mailto:contact@laurent-udol.fr" class="block text-plaster/80 hover:text-clay transition" data-hover>contact@laurent-udol.fr</a>
-        <p class="text-plaster/60 mt-2">Caen & Calvados (14)</p>
-        <a href="#contact" class="mt-5 inline-flex items-center gap-2 rounded-xl border border-plaster/20 px-5 py-2.5 text-sm hover:bg-plaster hover:text-ink transition" data-hover>Demander un devis</a>
-      </div>
-    </div>
-    <div class="mt-14 pt-6 border-t border-plaster/10 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[11px] text-plaster/40">
-      <span>© <span id="year"></span> Laurent Udol — Plaquiste & Isolation</span>
-      <span>Caen · Calvados — Artisan plaquiste</span>
-    </div>
+<!-- FOOTER -->
+<footer class="border-t border-[var(--line)] py-8">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[10px] text-dim tracking-wider">
+    <span>© <span id="year"></span> TIMOTHÉE RAVACHE — CRÉATION DE SITES WEB</span>
+    <span>CAEN · NORMANDIE · À DISTANCE PARTOUT EN FRANCE</span>
   </div>
 </footer>
 
 <script>
 (function(){
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  'use strict';
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = matchMedia('(hover:hover)').matches;
 
-  /* ---- Preloader ---- */
-  window.addEventListener('load', function(){
-    var intro = document.getElementById('intro');
-    setTimeout(function(){
-      if(intro){ intro.classList.add('done'); setTimeout(function(){ intro.remove(); }, 1000); }
-      document.getElementById('heroTitle') && document.querySelector('section') && document.body.classList.add('hero-ready');
-    }, reduced ? 0 : 850);
-  });
-
-  /* ---- Year ---- */
   document.getElementById('year').textContent = new Date().getFullYear();
+  addEventListener('load', function(){ document.body.classList.add('ready'); });
+  setTimeout(function(){ document.body.classList.add('ready'); }, 1600);
 
-  /* ---- Scroll progress + navbar shrink ---- */
-  var progress = document.getElementById('progress');
-  var navbar = document.getElementById('navbar');
-  function onScroll(){
-    var st = window.scrollY || document.documentElement.scrollTop;
-    var h = document.documentElement.scrollHeight - window.innerHeight;
-    progress.style.width = (h > 0 ? (st/h*100) : 0) + '%';
-    if(st > 30){ navbar.classList.add('shadow-lg','py-2.5'); navbar.classList.remove('py-3'); }
-    else{ navbar.classList.remove('shadow-lg','py-2.5'); navbar.classList.add('py-3'); }
-  }
-  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  /* progress */
+  var prog = document.getElementById('progress');
+  addEventListener('scroll', function(){
+    var h = document.documentElement.scrollHeight - innerHeight;
+    if (prog) prog.style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
+  }, {passive:true});
 
-  /* ---- Reveal on scroll ---- */
-  var revealEls = document.querySelectorAll('[data-reveal]');
-  if('IntersectionObserver' in window && !reduced){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, {threshold:0.14, rootMargin:'0px 0px -8% 0px'});
-    revealEls.forEach(function(el){ io.observe(el); });
-  } else { revealEls.forEach(function(el){ el.classList.add('in'); }); }
+  /* reveals */
+  var rev = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window && !reduced) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    rev.forEach(function(el){ io.observe(el); });
+  } else rev.forEach(function(el){ el.classList.add('in'); });
 
-  /* ---- SVG draw + timeline ---- */
-  var drawEls = document.querySelectorAll('.draw, .tl-item');
-  if('IntersectionObserver' in window){
-    var io2 = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io2.unobserve(e.target); } });
-    }, {threshold:0.3});
-    drawEls.forEach(function(el){ io2.observe(el); });
-  } else { drawEls.forEach(function(el){ el.classList.add('in'); }); }
-
-  /* ---- Count up ---- */
-  function animateCount(el){
-    var to = parseFloat(el.getAttribute('data-to')); var dur = 1600; var start = null;
-    if(reduced){ el.textContent = to; return; }
-    function step(ts){
-      if(!start) start = ts; var p = Math.min((ts-start)/dur, 1);
-      var eased = 1 - Math.pow(1-p, 3);
-      el.textContent = Math.round(to*eased);
-      if(p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-  var counts = document.querySelectorAll('.count');
-  if('IntersectionObserver' in window){
-    var io3 = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting){ animateCount(e.target); io3.unobserve(e.target); } });
-    }, {threshold:0.6});
-    counts.forEach(function(el){ io3.observe(el); });
-  } else { counts.forEach(animateCount); }
-
-  /* ---- Custom cursor ---- */
-  var dot = document.getElementById('cursorDot'), ring = document.getElementById('cursorRing');
-  if(dot && ring && window.matchMedia('(hover:hover)').matches){
+  /* cursor */
+  var dot = document.getElementById('dot'), ring = document.getElementById('ring');
+  if (dot && ring && canHover) {
     var mx=0,my=0,rx=0,ry=0;
-    window.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)'; });
-    (function loop(){ rx+=(mx-rx)*0.18; ry+=(my-ry)*0.18; ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)'; requestAnimationFrame(loop); })();
-    document.querySelectorAll('[data-hover], a, button, input, select, textarea').forEach(function(el){
-      el.addEventListener('mouseenter', function(){ ring.classList.add('hovering'); });
-      el.addEventListener('mouseleave', function(){ ring.classList.remove('hovering'); });
+    addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)'; });
+    (function loop(){ rx+=(mx-rx)*.18; ry+=(my-ry)*.18; ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)'; requestAnimationFrame(loop); })();
+    document.querySelectorAll('[data-hover], a, button').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ ring.classList.add('hover'); });
+      el.addEventListener('mouseleave', function(){ ring.classList.remove('hover'); });
     });
   }
 
-  /* ---- Magnetic buttons ---- */
-  if(!reduced && window.matchMedia('(hover:hover)').matches){
-    document.querySelectorAll('.magnetic').forEach(function(btn){
-      btn.addEventListener('mousemove', function(e){
-        var r = btn.getBoundingClientRect();
-        var x = e.clientX - r.left - r.width/2, y = e.clientY - r.top - r.height/2;
-        btn.style.transform = 'translate('+(x*0.25)+'px,'+(y*0.35)+'px)';
-      });
-      btn.addEventListener('mouseleave', function(){ btn.style.transform=''; });
+  /* live preview iframes — injected lazily so a broken path just keeps the cover */
+  var pvs = document.querySelectorAll('.pv[data-src]');
+  function inject(pv){
+    if (pv.dataset.done) return; pv.dataset.done = '1';
+    var f = document.createElement('iframe');
+    f.setAttribute('title', 'Aperçu live du projet');
+    f.setAttribute('aria-hidden', 'true');
+    f.setAttribute('tabindex', '-1');
+    f.setAttribute('loading', 'lazy');
+    f.setAttribute('scrolling', 'no');
+    f.addEventListener('load', function(){
+      setTimeout(function(){ pv.classList.add('loaded'); }, 1800);
     });
+    f.src = pv.dataset.src;
+    pv.appendChild(f);
   }
-
-  /* ---- Parallax (mouse + scroll) ---- */
-  if(!reduced){
-    var pEls = document.querySelectorAll('.parallax');
-    window.addEventListener('mousemove', function(e){
-      var cx = (e.clientX/window.innerWidth - 0.5), cy = (e.clientY/window.innerHeight - 0.5);
-      pEls.forEach(function(el){ var d = parseFloat(el.getAttribute('data-depth'))||0.2; el.style.transform='translate('+(cx*d*40)+'px,'+(cy*d*40)+'px)'; });
-    }, {passive:true});
-  }
-
-  /* ---- Before / After slider ---- */
-  (function(){
-    var slider = document.getElementById('baSlider');
-    if(!slider) return;
-    var after = document.getElementById('baAfter'), handle = document.getElementById('baHandle');
-    var dragging = false;
-    function setPos(clientX){
-      var r = slider.getBoundingClientRect();
-      var x = Math.max(0, Math.min(clientX - r.left, r.width));
-      var pct = x / r.width * 100;
-      after.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
-      handle.style.left = pct + '%';
-    }
-    function start(e){ dragging = true; setPos((e.touches?e.touches[0].clientX:e.clientX)); }
-    function move(e){ if(dragging) setPos((e.touches?e.touches[0].clientX:e.clientX)); }
-    function end(){ dragging = false; }
-    slider.addEventListener('mousedown', start); window.addEventListener('mousemove', move); window.addEventListener('mouseup', end);
-    slider.addEventListener('touchstart', start, {passive:true}); window.addEventListener('touchmove', move, {passive:true}); window.addEventListener('touchend', end);
-    // gentle auto-hint on load
-    if(!reduced){ setTimeout(function(){ var p=50; var dir=-1; var n=0; var t=setInterval(function(){ p+=dir*1.4; n++; after.style.clipPath='inset(0 0 0 '+p+'%)'; handle.style.left=p+'%'; if(p<=38||p>=62) dir*=-1; if(n>40){ clearInterval(t); after.style.clipPath='inset(0 0 0 50%)'; handle.style.left='50%'; } }, 16); }, 1400); }
-  })();
-
-  /* ---- Service card glow follow ---- */
-  document.querySelectorAll('.svc').forEach(function(card){
-    card.addEventListener('mousemove', function(e){
-      var r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', (e.clientX-r.left)+'px');
-      card.style.setProperty('--my', (e.clientY-r.top)+'px');
-    });
-  });
-
-  /* ---- Contact form (demo handling) ---- */
-  var form = document.getElementById('contactForm');
-  if(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var label = document.getElementById('submitLabel');
-      var ok = form.checkValidity();
-      if(!ok){ form.reportValidity(); return; }
-      label.textContent = 'Merci ! Demande bien reçue ✓';
-      form.querySelector('button').classList.add('bg-sage'); form.querySelector('button').classList.remove('bg-clay');
-      setTimeout(function(){ form.reset(); label.textContent='Envoyer ma demande'; form.querySelector('button').classList.remove('bg-sage'); form.querySelector('button').classList.add('bg-clay'); }, 3500);
-    });
-  }
+  if ('IntersectionObserver' in window) {
+    var ioPv = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ inject(e.target); ioPv.unobserve(e.target); } });
+    }, {rootMargin:'200px'});
+    pvs.forEach(function(pv){ ioPv.observe(pv); });
+  } else pvs.forEach(inject);
 })();
 </script>
 </body>
