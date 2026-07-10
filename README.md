@@ -12,7 +12,7 @@ démos live.
 | `/restaurant/` | **Maison Noir** | Gastronomique nocturne — noir & or, scroll-telling 3 actes |
 | `/gite/` | **Mas des Oliviers** | Maison d'hôtes Provence — pierre & terracotta, sélecteur de chambres |
 | `/saas/` | **Nova** | SaaS analytics IA — galaxie 3D Three.js, GSAP, Lenis |
-| `/plaquiste/` | **Laurent Udol** | Artisan plaquiste — plâtre & sauge, slider avant/après |
+| `/plaquiste/` | **Atelier Bréval** | Artisan plaquiste — plâtre & sauge, photos, slider avant/après |
 
 ## Stack
 
