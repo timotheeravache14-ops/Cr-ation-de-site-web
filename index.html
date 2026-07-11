@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Timothée Ravache — Création de sites web · Design & développement</title>
+<meta name="description" content="Création de sites vitrines sur-mesure : direction artistique distinctive, animations soignées, mobile-first, accessibilité. Quatre démos live : restaurant gastronomique, maison d'hôtes, SaaS, artisan. Basé à Caen, disponible partout en France." />
+<meta name="theme-color" content="#0C0C0F" />
+<meta property="og:title" content="Timothée Ravache — Création de sites web" />
+<meta property="og:description" content="Des sites qui font lever les yeux. Quatre univers, quatre directions artistiques, zéro template." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0C0C0F', 'ink-2': '#121216', card: '#16161B',
+          cream: '#F3F1EC', muted: '#A2A0A8', dim: '#6E6C76',
+          gold: '#C9A24B', terra: '#BE6A47', violet: '#8B5CF6', sage: '#79916F'
+        },
+        fontFamily: {
+          display: ['"Instrument Serif"', 'serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root{ --line:rgba(243,241,236,.12); }
+  *{ -webkit-font-smoothing:antialiased; }
+  html{ scroll-behavior:smooth; }
+  body{ background:#0C0C0F; color:#F3F1EC; overflow-x:hidden; font-family:'Inter',sans-serif; cursor:none; }
+  @media (hover:none){ body{ cursor:auto; } }
+  ::selection{ background:#C9A24B; color:#0C0C0F; }
+  .serif{ font-family:'Instrument Serif',serif; }
+  .eyebrow{ font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.3em; font-weight:500; font-size:11px; }
+
+  .grain{ position:fixed; inset:0; z-index:9990; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='190'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  .cur-dot,.cur-ring{ position:fixed; top:0; left:0; z-index:9999; pointer-events:none; border-radius:50%; will-change:transform; }
+  .cur-dot{ width:6px; height:6px; background:#F3F1EC; transform:translate(-50%,-50%); mix-blend-mode:difference; }
+  .cur-ring{ width:38px; height:38px; border:1.5px solid rgba(243,241,236,.4); transform:translate(-50%,-50%); transition:width .3s,height .3s,border-color .3s; mix-blend-mode:difference; }
+  .cur-ring.hover{ width:70px; height:70px; border-color:#F3F1EC; }
+  @media (hover:none){ .cur-dot,.cur-ring{ display:none; } }
+
+  .progress{ position:fixed; top:0; left:0; height:2px; width:0; z-index:9998; background:linear-gradient(90deg,#C9A24B,#BE6A47,#8B5CF6); }
+
+  [data-reveal]{ opacity:0; transform:translateY(36px); transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1); }
+  [data-reveal].in{ opacity:1; transform:none; }
+  [data-d="1"]{ transition-delay:.1s; } [data-d="2"]{ transition-delay:.2s; } [data-d="3"]{ transition-delay:.3s; }
+
+  .line-r{ display:block; overflow:hidden; }
+  .line-r > span{ display:block; transform:translateY(112%); transition:transform 1.15s cubic-bezier(.16,1,.3,1); }
+  .ready .line-r > span{ transform:translateY(0); }
+  .ready .line-r:nth-child(2) > span{ transition-delay:.12s; }
+  .ready .line-r:nth-child(3) > span{ transition-delay:.24s; }
+
+  /* project cards */
+  .proj{ position:relative; border:1px solid var(--line); transition:border-color .5s, transform .6s cubic-bezier(.16,1,.3,1), box-shadow .6s; overflow:hidden; }
+  .proj:hover{ transform:translateY(-6px); }
+  .proj.acc-gold:hover{ border-color:rgba(201,162,75,.6); box-shadow:0 34px 80px -40px rgba(201,162,75,.35); }
+  .proj.acc-terra:hover{ border-color:rgba(190,106,71,.6); box-shadow:0 34px 80px -40px rgba(190,106,71,.35); }
+  .proj.acc-violet:hover{ border-color:rgba(139,92,246,.6); box-shadow:0 34px 80px -40px rgba(139,92,246,.35); }
+  .proj.acc-sage:hover{ border-color:rgba(121,145,111,.6); box-shadow:0 34px 80px -40px rgba(121,145,111,.35); }
+
+  /* live preview frame: iframe rendered at 4x width, scaled to 25% */
+  .pv{ position:relative; overflow:hidden; background:#101014; }
+  .pv .cover{ position:absolute; inset:0; display:grid; place-items:center; transition:opacity .8s ease; z-index:2; }
+  .pv iframe{ position:absolute; top:0; left:0; width:400%; height:400%; transform:scale(.25); transform-origin:0 0; border:0; pointer-events:none; opacity:0; transition:opacity .9s ease; z-index:1; }
+  .pv.loaded iframe{ opacity:1; }
+  .pv.loaded .cover{ opacity:0; }
+  .pv::after{ content:""; position:absolute; inset:0; z-index:3; background:linear-gradient(180deg,transparent 60%,rgba(12,12,15,.55)); pointer-events:none; }
+  .proj .pv > *{ transition:transform 1s cubic-bezier(.16,1,.3,1); }
+  .proj:hover .pv iframe, .proj:hover .pv .cover{ transform:scale(1.03); }
+  .proj:hover .pv.loaded iframe{ transform:scale(.2575); }
+
+  .chip{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; border:1px solid var(--line); border-radius:999px; padding:5px 11px; color:#A2A0A8; }
+
+  .mq{ display:flex; width:max-content; animation:mq 30s linear infinite; }
+  @keyframes mq{ to{ transform:translateX(-50%); } }
+
+  .link-u{ position:relative; }
+  .link-u::after{ content:""; position:absolute; left:0; bottom:-3px; height:1px; width:0; background:#F3F1EC; transition:width .4s cubic-bezier(.16,1,.3,1); }
+  .link-u:hover::after{ width:100%; }
+
+  .btn-cream{ background:#F3F1EC; color:#0C0C0F; transition:transform .3s, box-shadow .3s; }
+  .btn-cream:hover{ box-shadow:0 0 40px rgba(243,241,236,.25); }
+  .btn-ghost{ border:1px solid var(--line); transition:border-color .3s, background .3s; }
+  .btn-ghost:hover{ border-color:rgba(243,241,236,.5); background:rgba(243,241,236,.05); }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation:none !important; transition:none !important; }
+    [data-reveal]{ opacity:1; transform:none; }
+    .line-r>span{ transform:none; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="cur-ring" id="ring" aria-hidden="true"></div>
+<div class="cur-dot" id="dot" aria-hidden="true"></div>
+
+<a href="#contenu" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[10001] focus:bg-cream focus:text-ink focus:px-4 focus:py-2 focus:rounded">Aller au contenu</a>
+
+<!-- NAV -->
+<header class="fixed top-0 inset-x-0 z-[9995] px-5 sm:px-8 py-5 flex items-center justify-between backdrop-blur-sm bg-ink/60">
+  <a href="#top" class="font-mono text-sm tracking-wider" data-hover>TR<span class="text-gold">.</span></a>
+  <div class="hidden sm:flex items-center gap-8 text-sm text-muted">
+    <a href="#projets" class="link-u hover:text-cream transition-colors" data-hover>Projets</a>
+    <a href="#approche" class="link-u hover:text-cream transition-colors" data-hover>Approche</a>
+    <a href="#contact" class="link-u hover:text-cream transition-colors" data-hover>Contact</a>
+  </div>
+  <a href="mailto:timothee.ravache14@gmail.com" class="btn-ghost text-sm px-5 py-2.5 rounded-full" data-hover>Me contacter</a>
+</header>
+
+<main id="contenu"><span id="top"></span>
+
+<!-- HERO -->
+<section class="relative min-h-[92svh] flex items-center pt-28 pb-16 overflow-hidden">
+  <div class="absolute inset-0 -z-10" aria-hidden="true">
+    <div class="absolute -top-32 -left-24 w-[480px] h-[480px] rounded-full blur-3xl opacity-25" style="background:radial-gradient(circle,#C9A24B,transparent 65%)"></div>
+    <div class="absolute bottom-0 -right-32 w-[520px] h-[520px] rounded-full blur-3xl opacity-20" style="background:radial-gradient(circle,#8B5CF6,transparent 65%)"></div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 w-full">
+    <p class="eyebrow text-muted mb-8 flex items-center gap-3" data-reveal>
+      <span class="w-2 h-2 rounded-full bg-gold animate-pulse inline-block"></span>
+      Timothée Ravache · Création de sites web · Caen & à distance
+    </p>
+    <h1 class="font-medium tracking-[-0.02em] leading-[1.02] text-[clamp(2.8rem,8.2vw,7rem)]" id="heroTitle">
+      <span class="line-r"><span>Des sites qui font</span></span>
+      <span class="line-r"><span><em class="serif italic font-normal text-gold">lever</em> les yeux,</span></span>
+      <span class="line-r"><span>pas juste défiler.</span></span>
+    </h1>
+    <div class="mt-10 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+      <p class="max-w-xl text-lg text-muted leading-relaxed" data-reveal data-d="2">
+        Chaque projet reçoit sa propre direction artistique — palette, typographies, animations signatures — construite sur mesure pour son secteur. Zéro template. Quatre univers à explorer ci-dessous, en démo live.
+      </p>
+      <div class="flex items-center gap-4 shrink-0" data-reveal data-d="3">
+        <a href="#projets" class="btn-cream font-semibold px-7 py-4 rounded-full inline-flex items-center gap-2.5" data-hover>
+          Voir les projets
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14m0 0 6-6m-6 6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<section class="border-y border-[var(--line)] py-4 overflow-hidden" aria-hidden="true">
+  <div class="mq items-center font-mono text-sm text-dim tracking-wider">
+    <span class="flex items-center">
+      <span class="px-8">DIRECTION ARTISTIQUE</span><span class="text-gold">✳</span><span class="px-8">ANIMATIONS GSAP & THREE.JS</span><span class="text-terra">✳</span><span class="px-8">MOBILE-FIRST</span><span class="text-violet">✳</span><span class="px-8">ACCESSIBILITÉ</span><span class="text-sage">✳</span><span class="px-8">CONTENU CRÉDIBLE</span><span class="text-gold">✳</span><span class="px-8">PERFORMANCE</span><span class="text-terra">✳</span>
+    </span>
+    <span class="flex items-center">
+      <span class="px-8">DIRECTION ARTISTIQUE</span><span class="text-gold">✳</span><span class="px-8">ANIMATIONS GSAP & THREE.JS</span><span class="text-terra">✳</span><span class="px-8">MOBILE-FIRST</span><span class="text-violet">✳</span><span class="px-8">ACCESSIBILITÉ</span><span class="text-sage">✳</span><span class="px-8">CONTENU CRÉDIBLE</span><span class="text-gold">✳</span><span class="px-8">PERFORMANCE</span><span class="text-terra">✳</span>
+    </span>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets" class="py-24 sm:py-32">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+      <div>
+        <p class="eyebrow text-gold mb-5" data-reveal>Projets — démos live</p>
+        <h2 class="font-medium text-[clamp(2.2rem,5.5vw,4.2rem)] leading-none tracking-tight" data-reveal data-d="1">Quatre univers,<br/><em class="serif italic font-normal">quatre signatures.</em></h2>
+      </div>
+      <p class="md:max-w-sm text-muted" data-reveal data-d="2">Des concepts fictifs conçus de A à Z pour démontrer une direction artistique complète. Chaque vignette est le site réel, en direct — cliquez pour l'explorer.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- MAISON NOIR -->
+      <a href="restaurant/" target="_blank" rel="noopener" class="proj acc-gold rounded-3xl bg-card block group" data-reveal data-hover aria-label="Ouvrir la démo Maison Noir — restaurant gastronomique">
+        <div class="pv aspect-[16/10] rounded-t-3xl" data-src="restaurant/">
+          <div class="cover" style="background:radial-gradient(120% 100% at 70% 20%, rgba(201,162,75,.25), transparent 55%), linear-gradient(160deg,#141210,#0A0908)">
+            <span class="serif italic text-4xl" style="color:#C9A24B">Maison Noir</span>
+          </div>
+        </div>
+        <div class="p-7">
+          <div class="flex items-center justify-between gap-4 mb-3">
+            <h3 class="font-medium text-2xl tracking-tight">Maison Noir</h3>
+            <span class="eyebrow text-[9px]" style="color:#C9A24B">Restaurant gastronomique</span>
+          </div>
+          <p class="text-muted text-[15px] leading-relaxed mb-5">Luxe nocturne et théâtral : noir profond, or champagne, typographie haute couture. Scroll-telling en trois actes, menus dégustation en onglets, galerie en tilt 3D.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Scroll-telling épinglé</span><span class="chip">Tilt 3D</span><span class="chip">Parallaxe</span>
+          </div>
+          <div class="mt-6 inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3.5 transition-all" style="color:#C9A24B">
+            Voir la démo
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- MAS DES OLIVIERS -->
+      <a href="gite/" target="_blank" rel="noopener" class="proj acc-terra rounded-3xl bg-card block group" data-reveal data-d="1" data-hover aria-label="Ouvrir la démo Mas des Oliviers — maison d'hôtes">
+        <div class="pv aspect-[16/10] rounded-t-3xl" data-src="gite/">
+          <div class="cover" style="background:radial-gradient(120% 100% at 30% 20%, rgba(190,106,71,.3), transparent 55%), linear-gradient(160deg,#1A1512,#0E0B09)">
+            <span class="serif italic text-4xl" style="color:#BE6A47">Mas des Oliviers</span>
+          </div>
+        </div>
+        <div class="p-7">
+          <div class="flex items-center justify-between gap-4 mb-3">
+            <h3 class="font-medium text-2xl tracking-tight">Mas des Oliviers</h3>
+            <span class="eyebrow text-[9px]" style="color:#BE6A47">Maison d'hôtes · Provence</span>
+          </div>
+          <p class="text-muted text-[15px] leading-relaxed mb-5">Luxe rural et lumière dorée : pierre blonde, terracotta, oliviers. Sélecteur de chambres interactif, hero parallaxe, avis voyageurs, réservation.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Sélecteur interactif</span><span class="chip">Parallaxe</span><span class="chip">Tilt 3D</span>
+          </div>
+          <div class="mt-6 inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3.5 transition-all" style="color:#BE6A47">
+            Voir la démo
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- NOVA -->
+      <a href="saas/" target="_blank" rel="noopener" class="proj acc-violet rounded-3xl bg-card block group" data-reveal data-hover aria-label="Ouvrir la démo Nova — landing SaaS">
+        <div class="pv aspect-[16/10] rounded-t-3xl" data-src="saas/">
+          <div class="cover" style="background:radial-gradient(120% 100% at 70% 25%, rgba(139,92,246,.35), transparent 55%), radial-gradient(100% 100% at 20% 80%, rgba(34,211,238,.18), transparent 55%), linear-gradient(160deg,#0E0E1C,#07070E)">
+            <span class="font-medium text-4xl tracking-tight" style="color:#A78BFA">nova<span style="color:#22D3EE">*</span></span>
+          </div>
+        </div>
+        <div class="p-7">
+          <div class="flex items-center justify-between gap-4 mb-3">
+            <h3 class="font-medium text-2xl tracking-tight">Nova</h3>
+            <span class="eyebrow text-[9px]" style="color:#A78BFA">SaaS · Analytics IA</span>
+          </div>
+          <p class="text-muted text-[15px] leading-relaxed mb-5">Esthétique « aurora » : galaxie de particules 3D interactive (Three.js), sections épinglées, défilement horizontal, dashboard animé, smooth scroll Lenis.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Three.js</span><span class="chip">GSAP + ScrollTrigger</span><span class="chip">Lenis</span>
+          </div>
+          <div class="mt-6 inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3.5 transition-all" style="color:#A78BFA">
+            Voir la démo
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- ATELIER BRÉVAL -->
+      <a href="plaquiste/" target="_blank" rel="noopener" class="proj acc-sage rounded-3xl bg-card block group" data-reveal data-d="1" data-hover aria-label="Ouvrir la démo Atelier Bréval — artisan plaquiste">
+        <div class="pv aspect-[16/10] rounded-t-3xl" data-src="plaquiste/">
+          <div class="cover" style="background:radial-gradient(120% 100% at 30% 25%, rgba(121,145,111,.3), transparent 55%), linear-gradient(160deg,#151612,#0B0C0A)">
+            <span class="font-medium text-4xl tracking-tight" style="color:#9FB694">Atelier Bréval</span>
+          </div>
+        </div>
+        <div class="p-7">
+          <div class="flex items-center justify-between gap-4 mb-3">
+            <h3 class="font-medium text-2xl tracking-tight">Atelier Bréval</h3>
+            <span class="eyebrow text-[9px]" style="color:#9FB694">Artisan plaquiste · Caen</span>
+          </div>
+          <p class="text-muted text-[15px] leading-relaxed mb-5">Identité « plâtre & sauge », chaleureuse et artisanale. Photos immersives, comparateur avant/après photographique, timeline de chantier animée, carte de zone.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Slider avant/après</span><span class="chip">Timeline animée</span><span class="chip">SVG sur-mesure</span>
+          </div>
+          <div class="mt-6 inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3.5 transition-all" style="color:#9FB694">
+            Voir la démo
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <p class="mt-8 text-center font-mono text-[11px] text-dim tracking-wider" data-reveal>LES VIGNETTES SONT LES SITES RÉELS, EN DIRECT — PAS DES CAPTURES D'ÉCRAN.</p>
+  </div>
+</section>
+
+<!-- APPROCHE -->
+<section id="approche" class="py-24 sm:py-32 border-y border-[var(--line)] bg-ink-2/60">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-5">
+        <p class="eyebrow text-gold mb-5" data-reveal>L'approche</p>
+        <h2 class="font-medium text-[clamp(2rem,4.8vw,3.6rem)] leading-[1.05] tracking-tight" data-reveal data-d="1">Un site n'est pas<br/>un modèle <em class="serif italic font-normal">rempli.</em></h2>
+        <p class="mt-6 text-muted leading-relaxed" data-reveal data-d="2">Chaque secteur a ses codes, ses clients, sa lumière. Mon travail : les traduire en une expérience web qui donne immédiatement confiance — et envie.</p>
+      </div>
+      <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
+        <div class="rounded-2xl border border-[var(--line)] p-6" data-reveal data-hover>
+          <div class="font-mono text-xs text-gold mb-3">01</div>
+          <h3 class="font-medium text-lg mb-2">Direction artistique dédiée</h3>
+          <p class="text-muted text-sm leading-relaxed">Palette, typographies, ambiance et animations choisies pour votre secteur. Deux pistes proposées avant la première ligne de code.</p>
+        </div>
+        <div class="rounded-2xl border border-[var(--line)] p-6" data-reveal data-d="1" data-hover>
+          <div class="font-mono text-xs text-terra mb-3">02</div>
+          <h3 class="font-medium text-lg mb-2">Contenu crédible</h3>
+          <p class="text-muted text-sm leading-relaxed">Textes travaillés, structure pensée pour convertir : preuve sociale, parcours clair, appels à l'action au bon endroit.</p>
+        </div>
+        <div class="rounded-2xl border border-[var(--line)] p-6" data-reveal data-hover>
+          <div class="font-mono text-xs text-violet mb-3">03</div>
+          <h3 class="font-medium text-lg mb-2">Interactions signatures</h3>
+          <p class="text-muted text-sm leading-relaxed">Scroll-telling, 3D, sliders, micro-animations : au moins un moment mémorable par site — jamais gratuit, toujours au service du propos.</p>
+        </div>
+        <div class="rounded-2xl border border-[var(--line)] p-6" data-reveal data-d="1" data-hover>
+          <div class="font-mono text-xs text-sage mb-3">04</div>
+          <h3 class="font-medium text-lg mb-2">Solide par défaut</h3>
+          <p class="text-muted text-sm leading-relaxed">Mobile-first, rapide, accessible (contrastes, clavier, reduced-motion). Beau partout, robuste même quand tout ne charge pas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="relative py-28 sm:py-40 overflow-hidden">
+  <div class="absolute inset-0 -z-10" aria-hidden="true">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full blur-3xl opacity-20" style="background:radial-gradient(circle,#C9A24B,transparent 65%)"></div>
+  </div>
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+    <p class="eyebrow text-gold mb-6" data-reveal>Contact</p>
+    <h2 class="font-medium tracking-[-0.02em] leading-[1.05] text-[clamp(2.4rem,6.5vw,5rem)]" data-reveal data-d="1">Un projet en tête ?<br/><em class="serif italic font-normal">Parlons-en.</em></h2>
+    <p class="mt-6 text-lg text-muted max-w-xl mx-auto" data-reveal data-d="2">Site vitrine, refonte, landing produit — je réponds sous 24 h avec un premier avis honnête et une estimation.</p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4" data-reveal data-d="3">
+      <a href="mailto:timothee.ravache14@gmail.com" class="btn-cream font-semibold text-lg px-9 py-4.5 rounded-full inline-flex items-center gap-3 py-4" data-hover>
+        timothee.ravache14@gmail.com
+      </a>
+      <a href="https://www.malt.fr/profile/timotheeravache" target="_blank" rel="noopener" class="btn-ghost font-medium px-8 py-4 rounded-full" data-hover>Profil Malt</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t border-[var(--line)] py-8">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[10px] text-dim tracking-wider">
+    <span>© <span id="year"></span> TIMOTHÉE RAVACHE — CRÉATION DE SITES WEB</span>
+    <span>CAEN · NORMANDIE · À DISTANCE PARTOUT EN FRANCE</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = matchMedia('(hover:hover)').matches;
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  addEventListener('load', function(){ document.body.classList.add('ready'); });
+  setTimeout(function(){ document.body.classList.add('ready'); }, 1600);
+
+  /* progress */
+  var prog = document.getElementById('progress');
+  addEventListener('scroll', function(){
+    var h = document.documentElement.scrollHeight - innerHeight;
+    if (prog) prog.style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
+  }, {passive:true});
+
+  /* reveals */
+  var rev = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window && !reduced) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    rev.forEach(function(el){ io.observe(el); });
+  } else rev.forEach(function(el){ el.classList.add('in'); });
+
+  /* cursor */
+  var dot = document.getElementById('dot'), ring = document.getElementById('ring');
+  if (dot && ring && canHover) {
+    var mx=0,my=0,rx=0,ry=0;
+    addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)'; });
+    (function loop(){ rx+=(mx-rx)*.18; ry+=(my-ry)*.18; ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)'; requestAnimationFrame(loop); })();
+    document.querySelectorAll('[data-hover], a, button').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ ring.classList.add('hover'); });
+      el.addEventListener('mouseleave', function(){ ring.classList.remove('hover'); });
+    });
+  }
+
+  /* live preview iframes — injected lazily so a broken path just keeps the cover */
+  var pvs = document.querySelectorAll('.pv[data-src]');
+  function inject(pv){
+    if (pv.dataset.done) return; pv.dataset.done = '1';
+    var f = document.createElement('iframe');
+    f.setAttribute('title', 'Aperçu live du projet');
+    f.setAttribute('aria-hidden', 'true');
+    f.setAttribute('tabindex', '-1');
+    f.setAttribute('loading', 'lazy');
+    f.setAttribute('scrolling', 'no');
+    f.addEventListener('load', function(){
+      setTimeout(function(){ pv.classList.add('loaded'); }, 1800);
+    });
+    f.src = pv.dataset.src;
+    pv.appendChild(f);
+  }
+  if ('IntersectionObserver' in window) {
+    var ioPv = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ inject(e.target); ioPv.unobserve(e.target); } });
+    }, {rootMargin:'200px'});
+    pvs.forEach(function(pv){ ioPv.observe(pv); });
+  } else pvs.forEach(inject);
+})();
+</script>
+</body>
+</html>
