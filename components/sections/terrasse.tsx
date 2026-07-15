@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Reveal } from "@/components/reveal"
+import { asset } from "@/lib/asset"
 
 export function Terrasse() {
   return (
@@ -49,7 +50,7 @@ export function Terrasse() {
         <Reveal delay={0.1} className="order-1 md:order-2">
           <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-[0_35px_70px_-25px_rgba(50,35,20,0.5)]">
             <Image
-              src="/images/cour-petanque.jpg"
+              src={asset("/images/cour-petanque.jpg")}
               alt="Cour privée de La Pergola avec son terrain de pétanque, sa pergola en bois et ses tables"
               fill
               sizes="(max-width: 768px) 100vw, 45vw"

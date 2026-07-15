@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Reveal } from "@/components/reveal"
+import { asset } from "@/lib/asset"
 
 const features = [
   {
@@ -39,7 +40,7 @@ export function About() {
         <Reveal className="order-2 md:order-1">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[0_30px_60px_-25px_rgba(60,45,30,0.45)]">
             <Image
-              src="/images/burrata.jpg"
+              src={asset("/images/burrata.jpg")}
               alt="Burrata de saison au pesto, chips de coppa et tomates cerises servie à La Pergola"
               fill
               sizes="(max-width: 768px) 100vw, 45vw"

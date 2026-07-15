@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Reveal } from "@/components/reveal"
+import { asset } from "@/lib/asset"
 
 const photos = [
   {
@@ -38,7 +39,7 @@ export function Gallery() {
             <Reveal key={photo.src} delay={0.06 * i} className="mb-5 block break-inside-avoid">
               <div className="relative overflow-hidden rounded-2xl shadow-[0_20px_45px_-30px_rgba(60,45,30,0.5)]">
                 <Image
-                  src={photo.src}
+                  src={asset(photo.src)}
                   alt={photo.alt}
                   width={800}
                   height={800}

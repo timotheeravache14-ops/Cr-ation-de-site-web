@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Reveal } from "@/components/reveal"
+import { asset } from "@/lib/asset"
 
 export function Ambiance() {
   return (
@@ -16,7 +17,7 @@ export function Ambiance() {
         <Reveal delay={0.1} className="order-1">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[0_35px_70px_-25px_rgba(50,35,20,0.55)]">
             <Image
-              src="/images/cocktails-bar.jpg"
+              src={asset("/images/cocktails-bar.jpg")}
               alt="Cocktails signature de La Pergola dressés sur le comptoir du bar"
               fill
               sizes="(max-width: 768px) 100vw, 45vw"
