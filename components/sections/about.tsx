@@ -39,8 +39,8 @@ export function About() {
         <Reveal className="order-2 md:order-1">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[0_30px_60px_-25px_rgba(60,45,30,0.45)]">
             <Image
-              src="/images/plats-maison.jpg"
-              alt="Assiettes de tapas maison servies à La Pergola : röstis dorés, salade de chèvre et charcuterie"
+              src="/images/burrata.jpg"
+              alt="Burrata de saison au pesto, chips de coppa et tomates cerises servie à La Pergola"
               fill
               sizes="(max-width: 768px) 100vw, 45vw"
               className="object-cover"

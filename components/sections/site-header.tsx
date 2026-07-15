@@ -5,9 +5,10 @@ import { contact } from "@/lib/menu"
 
 const links = [
   { href: "#accueil", label: "Accueil" },
+  { href: "#terrasse", label: "Terrasse" },
   { href: "#ambiance", label: "Ambiance" },
   { href: "#menu", label: "Carte" },
-  { href: "#avis", label: "Avis" },
+  { href: "#galerie", label: "Galerie" },
   { href: "#infos", label: "Infos" },
 ]
 

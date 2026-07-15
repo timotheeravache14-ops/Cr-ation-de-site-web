@@ -1,8 +1,10 @@
 import { SiteHeader } from "@/components/sections/site-header"
 import { Hero } from "@/components/sections/hero"
 import { About } from "@/components/sections/about"
+import { Terrasse } from "@/components/sections/terrasse"
 import { Ambiance } from "@/components/sections/ambiance"
 import { MenuSection } from "@/components/sections/menu-section"
+import { Gallery } from "@/components/sections/gallery"
 import { Reviews } from "@/components/sections/reviews"
 import { Info } from "@/components/sections/info"
 import { SiteFooter } from "@/components/sections/site-footer"
@@ -63,8 +65,10 @@ export default function Home() {
       <main>
         <Hero />
         <About />
+        <Terrasse />
         <Ambiance />
         <MenuSection />
+        <Gallery />
         <Reviews />
         <Info />
       </main>

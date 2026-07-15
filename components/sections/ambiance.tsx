@@ -5,15 +5,27 @@ export function Ambiance() {
   return (
     <section
       id="ambiance"
-      className="relative overflow-hidden bg-cream-deep py-24 md:py-32"
+      className="relative overflow-hidden bg-cream py-24 md:py-32"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-32 top-1/2 h-[28rem] w-[28rem] -translate-y-1/2 rounded-full bg-rose/25 blur-[120px]"
+        className="pointer-events-none absolute -right-32 top-1/2 h-[28rem] w-[28rem] -translate-y-1/2 rounded-full bg-rose/25 blur-[120px]"
       />
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-2 md:gap-16">
-        <div>
+        <Reveal delay={0.1} className="order-1">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[0_35px_70px_-25px_rgba(50,35,20,0.55)]">
+            <Image
+              src="/images/cocktails-bar.jpg"
+              alt="Cocktails signature de La Pergola dressés sur le comptoir du bar"
+              fill
+              sizes="(max-width: 768px) 100vw, 45vw"
+              className="object-cover"
+            />
+          </div>
+        </Reveal>
+
+        <div className="order-2">
           <Reveal>
             <p className="eyebrow">Ambiance</p>
             <h2 className="mt-4 text-4xl leading-tight text-ink md:text-5xl">
@@ -48,18 +60,6 @@ export function Ambiance() {
             </div>
           </Reveal>
         </div>
-
-        <Reveal delay={0.1}>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[0_35px_70px_-25px_rgba(50,35,20,0.55)]">
-            <Image
-              src="/images/ambiance-cocktails.jpg"
-              alt="Amis trinquant avec des cocktails autour d'une table de tapas à partager à La Pergola"
-              fill
-              sizes="(max-width: 768px) 100vw, 45vw"
-              className="object-cover"
-            />
-          </div>
-        </Reveal>
       </div>
     </section>
   )
