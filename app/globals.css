@@ -1,47 +1,127 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --card: #ffffff;
-  --card-foreground: #171717;
-  --border: #e5e5e5;
-}
+@theme {
+  /* Soft, warm palette drawn from La Pergola's identity */
+  --color-cream: #f8f2e8;
+  --color-cream-deep: #f1e7d6;
+  --color-surface: #fffdf8;
+  --color-ink: #2c2721;
+  --color-ink-soft: #6f6656;
+  --color-sage: #6e7150;
+  --color-sage-deep: #565839;
+  --color-terracotta: #c07a4e;
+  --color-terracotta-deep: #a5623b;
+  --color-rose: #e2b2ab;
+  --color-rose-soft: #f0d9d4;
+  --color-night: #241f1a;
+  --color-line: #e7ddcb;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-border: var(--border);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --animate-spotlight: spotlight 2s ease .75s 1 forwards;
+  --font-sans: var(--font-poppins);
+  --font-serif: var(--font-cormorant);
 
-  @keyframes spotlight {
-    0% {
-      opacity: 0;
-      transform: translate(-72%, -62%) scale(0.5);
-    }
+  --animate-shimmer: shimmer 6s ease-in-out infinite;
+
+  @keyframes shimmer {
+    0%,
     100% {
-      opacity: 1;
-      transform: translate(-50%, -40%) scale(1);
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.85;
+      transform: scale(1.08);
     }
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --card: #0a0a0a;
-    --card-foreground: #ededed;
-    --border: #2e2e2e;
+:root {
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--color-rose-soft);
+    color: var(--color-ink);
+  }
+
+  /* Anchored sections clear the sticky header */
+  section[id] {
+    scroll-margin-top: 5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .eyebrow {
+    font-family: var(--font-sans), sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-sage-deep);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background: var(--color-sage-deep);
+    color: var(--color-cream);
+    padding: 0.85rem 1.6rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition:
+      background-color 0.25s ease,
+      transform 0.25s ease;
+  }
+  .btn-primary:hover {
+    background: var(--color-sage);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-sage-deep);
+    color: var(--color-sage-deep);
+    padding: 0.85rem 1.6rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      transform 0.25s ease;
+  }
+  .btn-ghost:hover {
+    background: var(--color-sage-deep);
+    color: var(--color-cream);
+    transform: translateY(-2px);
+  }
 }
