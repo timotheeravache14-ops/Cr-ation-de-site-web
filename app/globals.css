@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  /* Chez Tuyet palette: cream paper, jade green, warm red, orange, wood */
+  --color-cream: #f6edd9;
+  --color-cream-deep: #efe3c8;
+  --color-surface: #fffdf6;
+  --color-ink: #2b2a20;
+  --color-ink-soft: #6d6653;
+  --color-jade: #2e9c77;
+  --color-jade-deep: #1f7d5e;
+  --color-red: #db4b33;
+  --color-red-deep: #bd3a25;
+  --color-orange: #e68a34;
+  --color-terracotta: #c25a3c;
+  --color-wood: #b07a44;
+  --color-line: #e6dabf;
+
+  --font-sans: var(--font-nunito);
+  --font-display: var(--font-baloo);
+  --font-script: var(--font-pacifico);
+
+  --animate-bob: bob 4s ease-in-out infinite;
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+}
+
+:root {
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  ::selection { background: var(--color-jade); color: #fff; }
+  section[id] { scroll-margin-top: 5rem; }
+}
+
+@layer components {
+  .eyebrow {
+    font-family: var(--font-sans), sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-jade-deep);
+  }
+  .script { font-family: var(--font-script), cursive; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    border-radius: 9999px;
+    background: var(--color-red);
+    color: #fff;
+    padding: 0.8rem 1.6rem;
+    font-weight: 700; font-size: 0.95rem;
+    box-shadow: 0 8px 20px -8px rgba(219,75,51,0.6);
+    transition: background-color .25s ease, transform .25s ease;
+  }
+  .btn-primary:hover { background: var(--color-red-deep); transform: translateY(-2px); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    border-radius: 9999px;
+    border: 2px solid var(--color-jade-deep);
+    color: var(--color-jade-deep);
+    padding: calc(0.8rem - 2px) calc(1.6rem - 2px);
+    font-weight: 700; font-size: 0.95rem;
+    transition: background-color .25s ease, color .25s ease, transform .25s ease;
+  }
+  .btn-ghost:hover { background: var(--color-jade-deep); color: #fff; transform: translateY(-2px); }
+}
